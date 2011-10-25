@@ -126,7 +126,7 @@ class Rule {
                 $this->processVariable($e, $this->stack);
             } else {
                 echo "Syntax error: " . $e->getType();
-                throw new Exception("Syntax error: " . $e->getType());
+                throw new \Exception("Syntax error: " . $e->getType());
             }
         }
 

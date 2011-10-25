@@ -27,7 +27,7 @@ class FileLoaderStrategy extends AbstractLoaderStrategy {
               }
             }
         } else {
-            throw new Exception('Failed to open stream: ' . $resource . ' does not exist.');
+            throw new \Exception('Failed to open stream: ' . $resource . ' does not exist.');
         }
         fclose($ruleFile);
         return $lines;

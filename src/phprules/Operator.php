@@ -36,7 +36,7 @@ class Operator extends RuleElement {
         if (in_array($operator, $this->operators)) {
             parent::__construct($operator);
         } else {
-            throw new Exception($operator . " is not a valid operator.");
+            throw new \Exception($operator . " is not a valid operator.");
         }
     }
 
