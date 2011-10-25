@@ -7,9 +7,9 @@ class TestVariable extends UnitTestCase {
 	public function setUp()
 	{
     parent::setUp();
-		$this->vInt = new Variable('maxNumPeople',10);
-		$this->vStr = new Variable('ticketType','firstClass');
-		$this->vFlt = new Variable('saleAmount',99.95);
+		$this->vInt = new Variable('maxNumPeople', 10);
+		$this->vStr = new Variable('ticketType', 'firstClass');
+		$this->vFlt = new Variable('saleAmount', 99.95);
   }
 
 
@@ -143,6 +143,14 @@ class TestVariable extends UnitTestCase {
 		$this->assertTrue($this->vStr->greaterThanOrEqualTo($v)->value);
 		$v->value = 'e';
 		$this->assertTrue($this->vStr->greaterThanOrEqualTo($v)->value);
+	}
+
+	public function testVariableStr_in()
+	{
+		$v = new Variable('sArr', array('yoo', 'foo', 'bar'));
+		$this->assertFalse($this->vStr->in($v)->value);
+		$v->value = array($this->vStr->value);
+		$this->assertTrue($this->vStr->in($v)->value);
 	}
 
 	// Float data type tests

@@ -18,6 +18,7 @@ class Operator extends RuleElement {
     const LESS_THAN_OR_EQUAL_TO    = 'LESSTHANOREQUALTO';
     const GREATER_THAN             = 'GREATERTHAN';
     const GREATER_THAN_OR_EQUAL_TO = 'GREATERTHANOREQUALTO';
+    const IN = 'IN';
 
     /**
      * The name of the RuleElement.
@@ -32,7 +33,20 @@ class Operator extends RuleElement {
      * @access public
      */
     public function __construct($operator) {
-        $this->operators = array( "AND", "OR", "NOT", "XOR", "EQUALTO", "NOTEQUALTO", "LESSTHAN", "GREATERTHAN", "LESSTHANOREQUALTO", "GREATERTHANOREQUALTO" );
+        $this->operators = array(
+            self::LOGICAL_OR,
+            self::LOGICAL_AND,
+            self::LOGICAL_NOT,
+            self::LOGICAL_XOR,
+            self::EQUAL_TO,
+            self::NOT_EQUAL_TO,
+            self::LESS_THAN,
+            self::LESS_THAN_OR_EQUAL_TO,
+            self::GREATER_THAN,
+            self::GREATER_THAN_OR_EQUAL_TO,
+            self::IN
+        );
+
         if (in_array($operator, $this->operators)) {
             parent::__construct($operator);
         } else {

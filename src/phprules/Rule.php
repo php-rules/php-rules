@@ -140,33 +140,26 @@ class Rule {
     private function processOperator( $operator ) {
         if ($operator->getName() == Operator::LOGICAL_AND) {
             $this->processAnd();
-        }
-        else if ($operator->getName() == Operator::LOGICAL_OR) {
+        } else if ($operator->getName() == Operator::LOGICAL_OR) {
             $this->processOr();
-        }
-        else if ($operator->getName() == Operator::LOGICAL_XOR) {
+        } else if ($operator->getName() == Operator::LOGICAL_XOR) {
             $this->processXor();
-        }
-        else if ($operator->getName() == Operator::LOGICAL_NOT) {
+        } else if ($operator->getName() == Operator::LOGICAL_NOT) {
             $this->processNot();
-        }
-        else if ($operator->getName() == Operator::EQUAL_TO) {
+        } else if ($operator->getName() == Operator::EQUAL_TO) {
             $this->processEqualTo();
-        }
-        else if ($operator->getName() == Operator::NOT_EQUAL_TO) {
+        } else if ($operator->getName() == Operator::NOT_EQUAL_TO) {
             $this->processNotEqualTo();
-        }
-        else if ($operator->getName() == Operator::LESS_THAN) {
+        } else if ($operator->getName() == Operator::LESS_THAN) {
             $this->processLessThan();
-        }
-        else if ($operator->getName() == Operator::GREATER_THAN) {
+        } else if ($operator->getName() == Operator::GREATER_THAN) {
             $this->processGreaterThan();
-        }
-        else if ($operator->getName() == Operator::LESS_THAN_OR_EQUAL_TO) {
+        } else if ($operator->getName() == Operator::LESS_THAN_OR_EQUAL_TO) {
             $this->processLessThanOrEqualTo();
-        }
-        else if ($operator->getName() == Operator::GREATER_THAN_OR_EQUAL_TO) {
+        } else if ($operator->getName() == Operator::GREATER_THAN_OR_EQUAL_TO) {
             $this->processGreaterThanOrEqualTo();
+        } else if ($operator->getName() == Operator::IN) {
+            $this->processIn();
         }
     }
 
@@ -271,6 +264,15 @@ class Rule {
         $rhs = array_pop($this->stack);
         $lhs = array_pop($this->stack);
         $this->stack[] = $rhs->greaterThanOrEqualTo($lhs);
+    }
+
+    /**
+     * Processes IN Operators for RuleContext evaluation and adds them to the {@link $stack}.
+     */
+    private function processIn() {
+        $rhs = array_pop($this->stack);
+        $lhs = array_pop($this->stack);
+        $this->stack[] = $rhs->in($lhs);
     }
 
     /**
