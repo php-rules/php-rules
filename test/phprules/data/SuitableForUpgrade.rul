@@ -1,0 +1,12 @@
+# Rule establishing when an airline passenger may be
+# allowed to upgrade his/her seat.
+
+passengerIsEconomy IS true      
+passengerIsGoldCardHolder IS true
+passengerIsSilverCardHolder IS true 
+OR
+AND
+passengerCarryOnBaggageAllowance EQUALS 15.0        
+passengerCarryOnBaggageWeight EQUALS 10.0
+LESSTHANOREQUALTO       
+AND
