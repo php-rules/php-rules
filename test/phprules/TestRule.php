@@ -3,6 +3,7 @@
 use phprules\Operator;
 use phprules\Rule;
 use phprules\RuleContext;
+use phprules\RuleSet;
 
 class TestRule extends UnitTestCase {
 
@@ -108,6 +109,32 @@ class TestRule extends UnitTestCase {
 		$this->assertFalse($result->value);
 	}
 
+  public function testIn() {
+      // rule with default null brand
+      $brandRule = new Rule( 'brandRule' );
+      $brandRule->addVariable( 'brandList', array() );
+      $brandRule->addVariable( 'brand', null );
+      $brandRule->addOperator( "IN" );
+
+      // there might be other rules, etc to add...
+      $finalRuleSet = new RuleSet ( 'finalRuleSet' );
+      $finalRuleSet->addRule( $brandRule );
+
+
+      // the actual values...
+      $brandRuleSetContext = new RuleContext( 'brandRuleSetContex' );
+      $brandRuleSetContext->addVariable( 'brand', 'yoo' );
+      $brandRuleSetContext->addVariable( 'brandList', array('yoo', 'foo', 'bar') );
+
+      // collect all variables
+      $finalRuleSetContext = new RuleContext( 'finalRuleSetContex' );
+      $finalRuleSetContext->append( $brandRuleSetContext );
+
+
+      $proposition = $finalRuleSet->evaluate( $finalRuleSetContext );
+      $this->assertTrue($proposition->value);
+  }
+
 	// Test complex rule evaluation
 	public function test_Rule_IsEligibleForUpgrade_PassengerIsEconomy_TRUE()
 	{
@@ -194,4 +221,5 @@ class TestRule extends UnitTestCase {
 		$ruleContext->addVariable('passengerCarryOnBaggageWeight', 10.0);
 		return $ruleContext;
 	}
+
 }

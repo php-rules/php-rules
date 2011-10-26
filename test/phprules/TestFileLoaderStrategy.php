@@ -56,6 +56,6 @@ class TestFileLoaderStrategy extends UnitTestCase {
 		$this->assertNotNull($p);
 		$this->assertEqual('Proposition', $p->getType());
 		$this->assertTrue($p->value);
-		$this->assertNotNull($p->name);
+		$this->assertNotNull($p->getName());
 	}
 }

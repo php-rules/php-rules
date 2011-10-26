@@ -99,7 +99,7 @@ class Rule {
         $this->stack = array();
         foreach ($this->elements as $e) {
             if ($e->getType() == "Proposition" || $e->getType() == "Variable") {
-                $element = $ruleContext->findElement( $e->getName() );
+                $element = $ruleContext->findElement($e->getName());
                 if ($element) {
                     $e->setValue($element->getValue());
                 } else {
@@ -281,12 +281,12 @@ class Rule {
      * @return string
      */
     public function __toString() {
-      $result = $this->name . "\n";
-      foreach ($this->elements as $e) {
-          $result = $result . $e . "\n";
-      }
+        $result = $this->name . "\n";
+        foreach ($this->elements as $e) {
+            $result = $result . $e . "\n";
+        }
 
-      return $result;
+        return $result;
     }
 
 }

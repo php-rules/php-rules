@@ -13,7 +13,7 @@ abstract class RuleElement {
      *
      * @var string
      */
-    public $name;
+    private $name;
 
 
     /**

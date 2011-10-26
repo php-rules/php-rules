@@ -14,7 +14,7 @@ class TestProposition extends UnitTestCase {
 
 	public function testPropositionName()
 	{
-		$this->assertEqual($this->p->name, 'goldCardHolder');
+		$this->assertEqual($this->p->getName(), 'goldCardHolder');
 	}
 
 	public function testPropositionValue()

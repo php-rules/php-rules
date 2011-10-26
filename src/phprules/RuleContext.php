@@ -33,7 +33,7 @@ class RuleContext {
      * @param string $statement The Proposition's statement.
      * @param boolean $value Whether the Proposition is TRUE or FALSE.
      */
-    public function addProposition( $statement, $value ) {
+    public function addProposition($statement, $value) {
         $this->elements[$statement] = new Proposition($statement, $value);
     }
 
