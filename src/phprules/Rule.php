@@ -54,22 +54,22 @@ class Rule {
     }
 
     /**
-     * Adds a Proposition to the array of {@link $elements}.
+     * Adds a proposition.
      *
-     * @param string $name The proposition's statement.
-     * @param boolean $truthValue Whether the Proposition is <code>true</code> or <code>false</code>.
+     * @param string $name The propositions statement.
+     * @param boolean $result Optional proposition result; default is <code>false</code>.
      */
-    public function addProposition($name, $truthValue) {
-        $this->elements[] = new Proposition($name, $truthValue);
+    public function addProposition($name, $result=false) {
+        $this->elements[] = new Proposition($name, $result);
     }
 
     /**
-     * Adds a Variable to the array of {@link $elements}.
+     * Adds a variable.
      *
-     * @param string $name The Variable's name.
-     * @param mixed $value The Variable's value.
+     * @param string $name The name.
+     * @param mixed $value The value; default is <code>null</code>.
      */
-    public function addVariable($name, $value) {
+    public function addVariable($name, $value=null) {
         $this->elements[] = new Variable($name, $value);
     }
 
@@ -111,7 +111,7 @@ class Rule {
                 if ($element) {
                     $e->setValue($element->getValue());
                 } else {
-                    $e->setValue(false);
+                    throw new \Exception('Incomplete rule context, missing: ' . $e->getName());
                 }
             }
         }
