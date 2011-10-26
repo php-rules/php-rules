@@ -1,5 +1,6 @@
 <?php
 
+use phprules\Proposition;
 use phprules\RuleLoader;
 use phprules\strategy\FileLoaderStrategy;
 
@@ -54,7 +55,7 @@ class TestFileLoaderStrategy extends UnitTestCase {
 		$p = $rule->evaluate($ruleContext);
 
 		$this->assertNotNull($p);
-		$this->assertEqual('Proposition', $p->getType());
+		$this->assertTrue($p instanceof Proposition);
 		$this->assertTrue($p->value);
 		$this->assertNotNull($p->getName());
 	}

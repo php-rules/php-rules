@@ -15,12 +15,6 @@ class TestDateVariable extends UnitTestCase {
 		$this->assertNotNull($this->date);
 	}
 
-	public function test_DateVariable_getType()
-	{
-		$this->assertNotNull($this->date->getType());
-		$this->assertEqual('DateVariable', $this->date->getType());
-	}
-
 	public function test_DateVariable_equalTo()
 	{
 		$now = new DateVariable('dateNow', 'now');

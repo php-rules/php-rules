@@ -44,21 +44,12 @@ class Proposition extends RuleElement {
     }
 
     /**
-     * Returns &quot;Proposition.&quot;
-     *
-     * @return string
-     */
-    public function getType() {
-        return "Proposition";
-    }
-
-    /**
      * Returns a human-readable statement and value.
      *
      * @return string
      */
     public function __toString() {
-        return "[Proposition statement=" . $this->getName() . ", value=" . ($this->value ? "true" : "false") . "]";
+        return "[Proposition statement=" . $this->getName() . ", value=" . ($this->getValue() ? "true" : "false") . "]";
     }
 
     /**

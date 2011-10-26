@@ -21,16 +21,6 @@ class DateVariable extends Variable {
         parent::__construct($name, strtotime($value));
     }
 
-
-    /**
-     * Returns DateVariable.
-     * @access public
-     * @return string
-     */
-    public function getType() {
-        return "DateVariable";
-    }
-
     /**
      * Returns a human-readable statement and value.
      * @access public

@@ -31,7 +31,7 @@ abstract class ActivityRule extends Rule {
         // into the corresponding Propositions and Variables in the Rule
         $this->stack = array();
         foreach ($this->elements as $e) {
-            if ($e->getType() == "Proposition" || $e->getType() == "Variable") {
+            if ($e instanceof Proposition || $e instanceof Variable) {
                 $element = $ruleContext->findElement($e->name);
                 if ($element) {
                     $e->value = $element->value;

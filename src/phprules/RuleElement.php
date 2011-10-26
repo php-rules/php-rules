@@ -8,6 +8,7 @@ namespace phprules;
  * @package phprules
  */
 abstract class RuleElement {
+
     /**
      * The name of the RuleElement.
      *
@@ -17,7 +18,9 @@ abstract class RuleElement {
 
 
     /**
-     * Constructor initializes {@link $name}.
+     * Create new element.
+     *
+     * @param string name The name.
      */
     public function __construct($name) {
         $this->name = $name;
@@ -31,13 +34,6 @@ abstract class RuleElement {
     public function getName() {
         return $this->name;
     }
-
-    /**
-     * Returns the type of RuleElement.
-     *
-     * @return string
-     */
-    public abstract function getType();
 
     /**
      * Returns the name of the RuleElement.

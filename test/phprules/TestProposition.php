@@ -22,11 +22,6 @@ class TestProposition extends UnitTestCase {
 		$this->assertTrue($this->p->value);
 	}
 
-	public function testPropositionGetType()
-	{
-		$this->assertEqual($this->p->getType(), 'Proposition');
-	}
-
 	public function testPropositionToString()
 	{
 		$msg = '[Proposition statement=goldCardHolder, value=true]';

@@ -19,48 +19,34 @@ class Operator extends RuleElement {
     const GREATER_THAN             = 'GREATERTHAN';
     const GREATER_THAN_OR_EQUAL_TO = 'GREATERTHANOREQUALTO';
     const IN = 'IN';
+    const NOT_IN = 'NOT_IN';
+
+    private static $OPERATORS = array(
+        self::LOGICAL_OR,
+        self::LOGICAL_AND,
+        self::LOGICAL_NOT,
+        self::LOGICAL_XOR,
+        self::EQUAL_TO,
+        self::NOT_EQUAL_TO,
+        self::LESS_THAN,
+        self::LESS_THAN_OR_EQUAL_TO,
+        self::GREATER_THAN,
+        self::GREATER_THAN_OR_EQUAL_TO,
+        self::IN,
+        self::NOT_IN
+    );
+
 
     /**
-     * The name of the RuleElement.
+     * Create new instance.
      *
-     * @var array
-     */
-    private $operators;
-
-
-    /**
-     * Constructor initializes {@link $name}, i.e., the operator.
-     * @access public
+     * @param string operator The operator.
      */
     public function __construct($operator) {
-        $this->operators = array(
-            self::LOGICAL_OR,
-            self::LOGICAL_AND,
-            self::LOGICAL_NOT,
-            self::LOGICAL_XOR,
-            self::EQUAL_TO,
-            self::NOT_EQUAL_TO,
-            self::LESS_THAN,
-            self::LESS_THAN_OR_EQUAL_TO,
-            self::GREATER_THAN,
-            self::GREATER_THAN_OR_EQUAL_TO,
-            self::IN
-        );
-
-        if (in_array($operator, $this->operators)) {
-            parent::__construct($operator);
-        } else {
+        parent::__construct($operator);
+        if (!in_array($operator, self::$OPERATORS)) {
             throw new \Exception($operator . " is not a valid operator.");
         }
-    }
-
-    /**
-     * Returns "Operator."
-     *
-     * @return string
-     */
-    public function getType() {
-        return "Operator";
     }
 
 }

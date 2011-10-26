@@ -20,13 +20,6 @@ class Rule {
      */
     public $name;
     /**
-     * The cannonical name of the Rule, i.e., the unique means of identifying
-     * the Rule. Namespace notation is recommended.
-     * @access public
-     * @var string
-     */
-    public $cannonicalName;
-    /**
      * Human-readable description of the Rule's purpose.
      * @access public
      * @var string
@@ -98,7 +91,7 @@ class Rule {
         // into the corresponding Propositions and Variables in the Rule
         $this->stack = array();
         foreach ($this->elements as $e) {
-            if ($e->getType() == "Proposition" || $e->getType() == "Variable") {
+            if ($e instanceof Proposition || $e instanceof Variable) {
                 $element = $ruleContext->findElement($e->getName());
                 if ($element) {
                     $e->setValue($element->getValue());
@@ -118,15 +111,14 @@ class Rule {
     private function process() {
         $this->stack = array();
         foreach ($this->elements as $e) {
-            if ($e->getType() == "Operator") {
+            if ($e instanceof Operator) {
                 $this->processOperator($e, $this->stack);
-            } else if ($e->getType() == "Proposition") {
+            } else if ($e instanceof Proposition) {
                 $this->processProposition($e, $this->stack);
-            } else if ($e->getType() == "Variable") {
+            } else if ($e instanceof Variable) {
                 $this->processVariable($e, $this->stack);
             } else {
-                echo "Syntax error: " . $e->getType();
-                throw new \Exception("Syntax error: " . $e->getType());
+                throw new \Exception("Invalid element type: " . get_class($e));
             }
         }
 

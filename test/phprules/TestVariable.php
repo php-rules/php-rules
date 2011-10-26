@@ -15,11 +15,6 @@ class TestVariable extends UnitTestCase {
 
 	// Integer data type tests
 
-	public function testVariableInt_getType()
-	{
-		$this->assertEqual($this->vInt->getType(), 'Variable');
-	}
-
 	public function testVariableInt_toString()
 	{
 		$this->assertEqual($this->vInt, '[Variable name=maxNumPeople, value=10]');
@@ -89,11 +84,6 @@ class TestVariable extends UnitTestCase {
 
 	// String data type tests
 
-	public function testVariableStr_getType()
-	{
-		$this->assertEqual($this->vStr->getType(), 'Variable');
-	}
-
 	public function testVariableStr_toString()
 	{
 		$this->assertEqual($this->vStr, '[Variable name=ticketType, value=firstClass]');
@@ -154,11 +144,6 @@ class TestVariable extends UnitTestCase {
 	}
 
 	// Float data type tests
-
-	public function testVariableFlt_getType()
-	{
-		$this->assertEqual($this->vFlt->getType(), 'Variable');
-	}
 
 	public function testVariableFlt_toString()
 	{

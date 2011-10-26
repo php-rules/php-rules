@@ -15,17 +15,8 @@ class Variable extends RuleElement {
      * Constructor initializes {@link $name}, and the {@link $value}.
      */
     public function __construct($name, $value) {
-        parent::__construct( $name );
+        parent::__construct($name);
         $this->value = $value;
-    }
-
-    /**
-     * Returns &quot;Variable.&quot;
-     *
-     * @return string
-     */
-    public function getType() {
-        return "Variable";
     }
 
     /**

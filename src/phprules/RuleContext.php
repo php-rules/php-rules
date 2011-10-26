@@ -54,7 +54,7 @@ class RuleContext {
      * @return RuleElement
      */
     public function findElement($name) {
-      return $this->elements[ $name ];
+      return $this->elements[$name];
     }
 
     /**
