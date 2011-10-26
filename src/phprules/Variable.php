@@ -126,7 +126,7 @@ class Variable extends RuleElement {
      */
     public function in(Variable $variable) {
         $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
-        $truthValue = in_array($this->value, $variable->value);
+        $truthValue = is_array($variable->value) && in_array($this->value, $variable->value);
         return new Proposition($statement, $truthValue);
     }
 

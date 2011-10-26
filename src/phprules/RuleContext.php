@@ -54,7 +54,7 @@ class RuleContext {
      * @return RuleElement
      */
     public function findElement($name) {
-      return $this->elements[$name];
+        return array_key_exists($name, $this->elements) ? $this->elements[$name] : null;
     }
 
     /**
