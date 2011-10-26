@@ -11,7 +11,7 @@ class TestRule extends UnitTestCase {
 	{
 		$rule = new Rule('testRuleName');
 		$expected = 'testRuleName';
-		$this->assertEqual($expected, $rule->name);
+		$this->assertEqual($expected, $rule->getName());
 	}
 
 	// Test Integer Variable Evaluations

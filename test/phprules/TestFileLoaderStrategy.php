@@ -33,8 +33,8 @@ class TestFileLoaderStrategy extends UnitTestCase {
 		$rule = $this->loader->loadRule($this->dataFolderPath . 'SuitableForUpgrade.rul');
 
 		$this->assertNotNull($rule);
-		$this->assertNotNull($rule->elements);
-		$this->assertEqual(9, count($rule->elements));
+		$this->assertNotNull($rule->getElements());
+		$this->assertEqual(9, count($rule->getElements()));
 	}
 
 	public function test_RuleLoader_loadRuleContext()

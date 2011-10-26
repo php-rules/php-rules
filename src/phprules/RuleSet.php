@@ -54,7 +54,7 @@ class RuleSet {
         // Accumulate the results of evaluating the Rules
         foreach ($this->rules as $rule) {
             $result = $rule->evaluate($ruleContext);
-            $resultsForRules[$rule->name] = $result;
+            $resultsForRules[$rule->getName()] = $result;
         }
 
         // Apply the RuleOverrides

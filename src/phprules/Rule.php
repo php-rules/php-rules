@@ -18,20 +18,14 @@ class Rule {
      * @access public
      * @var string
      */
-    public $name;
-    /**
-     * Human-readable description of the Rule's purpose.
-     * @access public
-     * @var string
-     */
-    public $description;
+    private $name;
     /**
      * The RuleElements that comprise the Rule.
      * @access public
      * @var array
      * @see RuleElement
      */
-    public $elements;
+    protected $elements;
     /**
      * A stack data structure used during Rule evaluation.
      * @access private
@@ -41,7 +35,9 @@ class Rule {
 
 
     /**
-     * Constructor initializes {@link $name{ and the array of {@link $elements}.
+     * Create new rule.
+     *
+     * @param string name Optional rule name; default is an empty string.
      */
     public function __construct($name='') {
         $this->name = $name;
@@ -49,10 +45,19 @@ class Rule {
     }
 
     /**
+     * Get the name.
+     *
+     * @return string The name of this rule.
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
      * Adds a Proposition to the array of {@link $elements}.
      *
-     * @param string $name The Proposition's statement.
-     * @param boolean $truthValue Whether the Proposition is TRUE or FALSE.
+     * @param string $name The proposition's statement.
+     * @param boolean $truthValue Whether the Proposition is <code>true</code> or <code>false</code>.
      */
     public function addProposition($name, $truthValue) {
         $this->elements[] = new Proposition($name, $truthValue);
@@ -78,11 +83,21 @@ class Rule {
     }
 
     /**
-     * Evaluates a RuleContext. The RuleContext contains Propositions and Variables that have
-     * specific values. To apply the context, simply copy these values
-     * into the corresponding Propositions and Variables in the Rule.
+     * Get all elements.
      *
-     * @param RuleContext $ruleContext
+     * @return array List of <code>RuleElement</code> instances.
+     */
+    public function getElements() {
+        return $this->elements;
+    }
+
+    /**
+     * Evaluates a RuleContext.
+     *
+     * <p>The RuleContext contains Propositions and Variables that have  specific values.
+     *  To apply the context, simply copy these values into the corresponding Propositions and Variables in the Rule.</p>
+     *
+     * @param RuleContext $ruleContext The context in which to evaluate this rule.
      * @return Proposition
      */
     public function evaluate(RuleContext $ruleContext) {
