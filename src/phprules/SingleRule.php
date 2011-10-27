@@ -122,9 +122,8 @@ class SingleRule extends AbstractRule {
 
     /**
      * Driver method for processing Operators for RuleContext evaluation.
-     * @access private
      */
-    private function processOperator($operator) {
+    private function processOperator(Operator $operator) {
         if ($operator->getName() == Operator::LOGICAL_AND) {
             $this->processAnd();
         } else if ($operator->getName() == Operator::LOGICAL_OR) {
@@ -153,14 +152,14 @@ class SingleRule extends AbstractRule {
     /**
      * Processes Propositions for RuleContext evaluation and adds them to the {@link $stack}.
      */
-    private function processProposition($proposition) {
+    private function processProposition(Proposition $proposition) {
         $this->stack[] = $proposition;
     }
 
     /**
      * Processes Variables for RuleContext evaluation and adds them to the {@link $stack}.
      */
-	  private function processVariable($variable) {
+	  private function processVariable(Variable $variable) {
 		   $this->stack[] = $variable;
 	  }
 

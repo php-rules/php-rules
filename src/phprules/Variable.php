@@ -38,15 +38,6 @@ class Variable extends RuleElement {
     }
 
     /**
-     * Returns a human-readable statement and value.
-     *
-     * @return string
-     */
-    public function __toString() {
-        return "[Variable name=" . $this->getName() . ", value=" . $this->value . "]";
-    }
-
-    /**
      * Determines whether another Variable's value is equal to its own value.
      *
      * @param Variable $variable
@@ -128,6 +119,15 @@ class Variable extends RuleElement {
         $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
         $truthValue = is_array($variable->value) && in_array($this->value, $variable->value);
         return new Proposition($statement, $truthValue);
+    }
+
+    /**
+     * Returns a human-readable statement and value.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return "[Variable name=" . $this->getName() . ", value=" . $this->value . "]";
     }
 
 }

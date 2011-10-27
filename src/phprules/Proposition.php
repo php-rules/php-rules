@@ -17,8 +17,10 @@ class Proposition extends RuleElement {
 
 
     /**
-     * Constructor initializes {@link $name}, and the {@link $value}.
+     * Create new instance.
      *
+     * @param string $name The name.
+     * @param boolean $truthValue The truth value.
      */
     public function __construct($name, $truthValue) {
         parent::__construct($name);
@@ -41,15 +43,6 @@ class Proposition extends RuleElement {
      */
     public function setValue($value) {
         $this->value = $value;
-    }
-
-    /**
-     * Returns a human-readable statement and value.
-     *
-     * @return string
-     */
-    public function __toString() {
-        return "[Proposition statement=" . $this->getName() . ", value=" . ($this->getValue() ? "true" : "false") . "]";
     }
 
     /**
@@ -97,6 +90,15 @@ class Proposition extends RuleElement {
         $resultName  = "( " . $this->getName() . " XOR " . $proposition->getName() . " )";
         $resultValue = ($this->value xor $proposition->value);
         return new Proposition($resultName, $resultValue);
+    }
+
+    /**
+     * Returns a human-readable statement and value.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return "[Proposition statement=" . $this->getName() . ", value=" . ($this->getValue() ? "true" : "false") . "]";
     }
 
 }
