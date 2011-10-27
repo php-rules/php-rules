@@ -122,6 +122,18 @@ class Variable extends RuleElement {
     }
 
     /**
+     * Determines whether this value is not in another Variable.
+     *
+     * @param Variable $variable
+     * @return Proposition
+     */
+    public function notIn(Variable $variable) {
+        $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
+        $truthValue = !is_array($variable->value) || !in_array($this->value, $variable->value);
+        return new Proposition($statement, $truthValue);
+    }
+
+    /**
      * Returns a human-readable statement and value.
      *
      * @return string

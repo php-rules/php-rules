@@ -36,6 +36,21 @@ abstract class RuleElement {
     }
 
     /**
+     * Evalute this rule element.
+     *
+     * <p>In the context of a <code>SingleRule</code> this means returning something to be pushed to the
+     *  processing stack.</p>
+     * <p>The default behaviour is to return a reference to the this rule element - <code>$this</code>.</p>
+     *
+     * @param array $stack The stack.
+     * @return array New updated stack.
+     */
+    public function evaluate($stack) {
+        $stack[] = $this;
+        return $stack;
+    }
+
+    /**
      * Return a string representation of this rule element.
      *
      * @return string

@@ -106,159 +106,10 @@ class SingleRule extends AbstractRule {
      */
     private function evaluateElements() {
         foreach ($this->elements as $element) {
-            if ($element instanceof Operator) {
-                $this->processOperator($element);
-            } else if ($element instanceof Proposition) {
-                $this->processProposition($element);
-            } else if ($element instanceof Variable) {
-                $this->processVariable($element);
-            } else {
-                throw new \Exception("Invalid element type: " . get_class($element));
-            }
+            $this->stack = $element->evaluate($this->stack);
         }
 
         return array_pop($this->stack);
-    }
-
-    /**
-     * Driver method for processing Operators for RuleContext evaluation.
-     */
-    private function processOperator(Operator $operator) {
-        if ($operator->getName() == Operator::LOGICAL_AND) {
-            $this->processAnd();
-        } else if ($operator->getName() == Operator::LOGICAL_OR) {
-            $this->processOr();
-        } else if ($operator->getName() == Operator::LOGICAL_XOR) {
-            $this->processXor();
-        } else if ($operator->getName() == Operator::LOGICAL_NOT) {
-            $this->processNot();
-        } else if ($operator->getName() == Operator::EQUAL_TO) {
-            $this->processEqualTo();
-        } else if ($operator->getName() == Operator::NOT_EQUAL_TO) {
-            $this->processNotEqualTo();
-        } else if ($operator->getName() == Operator::LESS_THAN) {
-            $this->processLessThan();
-        } else if ($operator->getName() == Operator::GREATER_THAN) {
-            $this->processGreaterThan();
-        } else if ($operator->getName() == Operator::LESS_THAN_OR_EQUAL_TO) {
-            $this->processLessThanOrEqualTo();
-        } else if ($operator->getName() == Operator::GREATER_THAN_OR_EQUAL_TO) {
-            $this->processGreaterThanOrEqualTo();
-        } else if ($operator->getName() == Operator::IN) {
-            $this->processIn();
-        }
-    }
-
-    /**
-     * Processes Propositions for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processProposition(Proposition $proposition) {
-        $this->stack[] = $proposition;
-    }
-
-    /**
-     * Processes Variables for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-	  private function processVariable(Variable $variable) {
-		   $this->stack[] = $variable;
-	  }
-
-    /**
-     * Processes AND Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-	  private function processAnd() {
-		   $rhs = array_pop($this->stack);
-		   $lhs = array_pop($this->stack);
-		   $this->stack[] = $rhs->logicalAnd($lhs);
-	  }
-
-    /**
-     * Processes OR Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processOr() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->logicalOr($lhs);
-    }
-
-    /**
-     * Processes XOR Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processXor() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->logicalXor($lhs);
-    }
-
-    /**
-     * Processes NOT Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processNot() {
-        $rhs = array_pop($this->stack);
-        $this->stack[] = $rhs->logicalNot();
-    }
-
-    /**
-     * Processes EQUALTO Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processEqualTo() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->equalTo($lhs);
-    }
-
-    /**
-     * Processes NOTEQUALTO Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processNotEqualTo() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->notEqualTo($lhs);
-    }
-
-      /**
-       * Processes LESSTHAN Operators for RuleContext evaluation and adds them to the {@link $stack}.
-       */
-    private function processLessThan() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->lessThan($lhs);
-    }
-
-    /**
-     * Processes GREATERTHAN Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processGreaterThan() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->greaterThan($lhs);
-    }
-
-    /**
-     * Processes LESSTHANOREQUALTO Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processLessThanOrEqualTo() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->lessThanOrEqualTo($lhs);
-    }
-
-    /**
-     * Processes GREATERHANOREQUALTO Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processGreaterThanOrEqualTo() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->greaterThanOrEqualTo($lhs);
-    }
-
-    /**
-     * Processes IN Operators for RuleContext evaluation and adds them to the {@link $stack}.
-     */
-    private function processIn() {
-        $rhs = array_pop($this->stack);
-        $lhs = array_pop($this->stack);
-        $this->stack[] = $rhs->in($lhs);
     }
 
     /**
@@ -268,8 +119,8 @@ class SingleRule extends AbstractRule {
      */
     public function __toString() {
         $result = $this->name . "\n";
-        foreach ($this->elements as $e) {
-            $result = $result . $e . "\n";
+        foreach ($this->elements as $element) {
+            $result .= $element . "\n";
         }
 
         return $result;

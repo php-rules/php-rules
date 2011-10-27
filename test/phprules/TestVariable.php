@@ -143,6 +143,14 @@ class TestVariable extends UnitTestCase {
 		$this->assertTrue($this->vStr->in($v)->value);
 	}
 
+	public function testVariableStr_notIn()
+	{
+		$v = new Variable('sArr', array('yoo', 'foo', 'bar'));
+		$this->assertTrue($this->vStr->notIn($v)->value);
+		$v->value = array($this->vStr->value);
+		$this->assertFalse($this->vStr->notIn($v)->value);
+	}
+
 	// Float data type tests
 
 	public function testVariableFlt_toString()
