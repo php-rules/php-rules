@@ -9,7 +9,6 @@ namespace phprules;
  */
 abstract class AbstractRule implements Rule {
     protected $name;
-    protected $ruleOverrides;
 
 
     /**
@@ -19,7 +18,6 @@ abstract class AbstractRule implements Rule {
      */
     public function __construct($name) {
         $this->name = $name;
-        $this->ruleOverrides = array();
     }
 
 
@@ -28,13 +26,6 @@ abstract class AbstractRule implements Rule {
      */
     public function getName() {
         return $this->name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addRuleOverride(RuleOverride $ruleOverride) {
-        $this->ruleOverrides[] = $ruleOverride;
     }
 
     /**

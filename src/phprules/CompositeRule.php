@@ -16,6 +16,7 @@ class CompositeRule extends AbstractRule {
 
     private $rules;
     private $evaluationPolicy;
+    private $ruleOverrides;
 
 
     /**
@@ -29,6 +30,7 @@ class CompositeRule extends AbstractRule {
         $this->name = $name;
         $this->evaluationPolicy = $evaluationPolicy;
         $this->rules = array();
+        $this->ruleOverrides = array();
     }
 
     /**
@@ -38,6 +40,15 @@ class CompositeRule extends AbstractRule {
      */
     public function addRule(Rule $rule) {
         $this->rules[] = $rule;
+    }
+
+    /**
+     * Add a rule override.
+     *
+     * @param RuleOverride $ruleOverride The rule override.
+     */
+    public function addRuleOverride(RuleOverride $ruleOverride) {
+        $this->ruleOverrides[] = $ruleOverride;
     }
 
     /**

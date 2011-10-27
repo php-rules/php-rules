@@ -23,13 +23,6 @@ interface Rule {
     public function getName();
 
     /**
-     * Add a rule override.
-     *
-     * @param RuleOverride $ruleOverride The rule override.
-     */
-    public function addRuleOverride(RuleOverride $ruleOverride);
-
-    /**
      * Evaluate this rule within the given context.
      *
      * @param RuleContext $ruleContext The context in which to evaluate this rule.
