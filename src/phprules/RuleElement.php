@@ -36,12 +36,12 @@ abstract class RuleElement {
     }
 
     /**
-     * Returns the name of the RuleElement.
+     * Return a string representation of this rule element.
      *
      * @return string
      */
     public function __toString() {
-        return $this->name;
+        return '['.get_class($this).' name='.$this->name.']';
     }
 
 }

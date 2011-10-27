@@ -13,27 +13,28 @@ class RuleLoader {
     /**
      * The algorithm used to retrieve a Rule or RuleContext.
      *
-     * @var RuleContextLoaderStrategy
+     * @var LoaderStrategy
      */
-    private $loaderStrategy = null;
+    private $loaderStrategy;
     /**
      * @access public
      * @var Rule
      */
-    public $rule = null;
+    public $rule;
     /**
      * @access public
      * @var RuleContext
      */
-    public $ruleContext = null;
+    public $ruleContext;
 
 
     /**
      * Create a new context.
      */
     public function __construct() {
-        $this->rule = new Rule();
+        $this->rule = new SingleRule(spl_object_hash($this).time());
         $this->ruleContext = new RuleContext();
+        $this->loaderStrategy = null;
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
-use phprules\Rule;
+use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\Operator;
 
 class TestRuleContext extends UnitTestCase {
 
     public function testIncompleteRuleContext() {
-        $rule = new Rule();
+        $rule = new SingleRule('foo');
         $rule->addVariable('var1');
         $rule->addVariable('var2');
         $rule->addOperator(Operator::EQUAL_TO);
