@@ -1,5 +1,5 @@
 {
-    "name": "DerManoMann/phprules",
+    "name": "radebatz/phprules",
     "require": {
         "php": ">=5.3.0"
     }
