@@ -13,8 +13,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-interface Rule {
-
+interface Rule
+{
     /**
      * Get the name of this rule.
      *
@@ -25,7 +25,7 @@ interface Rule {
     /**
      * Evaluate this rule within the given context.
      *
-     * @param RuleContext $ruleContext The context in which to evaluate this rule.
+     * @param  RuleContext $ruleContext The context in which to evaluate this rule.
      * @return Proposition
      */
     public function evaluate(RuleContext $ruleContext);

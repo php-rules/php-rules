@@ -9,20 +9,21 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class RuleOverride {
+class RuleOverride
+{
     private $name;
     private $ruleName;
     private $value;
 
-
     /**
      * Create new rule override.
      *
-     * @param string $name The rule override name.
-     * @param string $ruleName The rule name.
-     * @param boolean $value The value.
+     * @param string  $name     The rule override name.
+     * @param string  $ruleName The rule name.
+     * @param boolean $value    The value.
      */
-    public function __construct($name, $ruleName, $value) {
+    public function __construct($name, $ruleName, $value)
+    {
         $this->name = $name;
         $this->ruleName = $ruleName;
         $this->value = $value;
@@ -33,7 +34,8 @@ class RuleOverride {
      *
      * @return string The rule override name.
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -42,7 +44,8 @@ class RuleOverride {
      *
      * @return string The rule name.
      */
-    public function getRuleName() {
+    public function getRuleName()
+    {
         return $this->ruleName;
     }
 
@@ -51,7 +54,8 @@ class RuleOverride {
      *
      * @return mixed The override value.
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 

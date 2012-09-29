@@ -10,7 +10,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class RuleContext {
+class RuleContext
+{
     public $name;
     public $elements;
 
@@ -19,7 +20,8 @@ class RuleContext {
      *
      * @param string $name The context name.
      */
-    public function __construct($name='') {
+    public function __construct($name='')
+    {
         $this->name = $name;
         // elements is a dictionary - a set of {name, value} pairs
         // The names are Proposition or Variable names and
@@ -30,30 +32,33 @@ class RuleContext {
     /**
      * Adds a Proposition to the array of {@link $elements}.
      *
-     * @param string $statement The Proposition's statement.
-     * @param boolean $value Whether the Proposition is TRUE or FALSE.
+     * @param string  $statement The Proposition's statement.
+     * @param boolean $value     Whether the Proposition is TRUE or FALSE.
      */
-    public function addProposition($statement, $value) {
+    public function addProposition($statement, $value)
+    {
         $this->elements[$statement] = new Proposition($statement, $value);
     }
 
     /**
      * Adds a Variable to the array of {@link $elements}.
      *
-     * @param string $name The Variable's name.
-     * @param mixed $value The Variable's value.
+     * @param string $name  The Variable's name.
+     * @param mixed  $value The Variable's value.
      */
-    public function addVariable($name, $value) {
+    public function addVariable($name, $value)
+    {
         $this->elements[ $name ] = new Variable($name, $value);
     }
 
     /**
      * Find and return a RuleElement by name, if it exists.
      *
-     * @param string $name The name (i.e., "key") of the RuleElement.
+     * @param  string      $name The name (i.e., "key") of the RuleElement.
      * @return RuleElement
      */
-    public function findElement($name) {
+    public function findElement($name)
+    {
         return array_key_exists($name, $this->elements) ? $this->elements[$name] : null;
     }
 
@@ -62,7 +67,8 @@ class RuleContext {
      *
      * @paaram RuleContext $ruleContext The context to append.
      */
-    public function append($ruleContext) {
+    public function append($ruleContext)
+    {
         foreach ($ruleContext->elements as $e) {
           $this->elements[ $e->getName() ] = $e;
         }
@@ -73,7 +79,8 @@ class RuleContext {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         $result = "";
         foreach (array_values($this->elements) as $e) {
             $result = $result . $e . "\n";

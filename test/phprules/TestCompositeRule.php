@@ -5,9 +5,10 @@ use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
 
-class TestCompositeRule extends UnitTestCase {
-
-    public function testAnd() {
+class TestCompositeRule extends UnitTestCase
+{
+    public function testAnd()
+    {
         // rule A
         $ruleA = new SingleRule('ruleA');
         $ruleA->addVariable('varA1');
@@ -53,7 +54,8 @@ class TestCompositeRule extends UnitTestCase {
         $this->assertFalse($result->value);
     }
 
-    public function testOr() {
+    public function testOr()
+    {
         // rule A
         $ruleA = new SingleRule('ruleA');
         $ruleA->addVariable('varA1');

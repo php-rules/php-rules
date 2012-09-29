@@ -7,8 +7,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-abstract class RuleElement {
-
+abstract class RuleElement
+{
     /**
      * The name of the RuleElement.
      *
@@ -16,13 +16,13 @@ abstract class RuleElement {
      */
     private $name;
 
-
     /**
      * Create new element.
      *
      * @param string name The name.
      */
-    public function __construct($name) {
+    public function __construct($name)
+    {
         $this->name = $name;
     }
 
@@ -31,7 +31,8 @@ abstract class RuleElement {
      *
      * @return string The name.
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -42,11 +43,13 @@ abstract class RuleElement {
      *  processing stack.</p>
      * <p>The default behaviour is to return a reference to the this rule element - <code>$this</code>.</p>
      *
-     * @param array $stack The stack.
+     * @param  array $stack The stack.
      * @return array New updated stack.
      */
-    public function evaluate($stack) {
+    public function evaluate($stack)
+    {
         $stack[] = $this;
+
         return $stack;
     }
 
@@ -55,7 +58,8 @@ abstract class RuleElement {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return '['.get_class($this).' name='.$this->name.']';
     }
 

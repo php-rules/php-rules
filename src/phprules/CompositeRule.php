@@ -10,7 +10,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class CompositeRule extends AbstractRule {
+class CompositeRule extends AbstractRule
+{
     const EVALUATE_OR = 'EVALUATE_OR';
     const EVALUATE_AND = 'EVALUATE_AND';
 
@@ -18,14 +19,14 @@ class CompositeRule extends AbstractRule {
     private $evaluationPolicy;
     private $ruleOverrides;
 
-
     /**
      * Create new composite rule.
      *
-     * @param string $name The name.
+     * @param string $name             The name.
      * @param string $evaluationPolicy The evaluation policy; default is <code>CompositeRule::EVALUATE_AND</code>.
      */
-    public function __construct($name, $evaluationPolicy=self::EVALUATE_AND) {
+    public function __construct($name, $evaluationPolicy=self::EVALUATE_AND)
+    {
         parent::__construct($name);
         $this->name = $name;
         $this->evaluationPolicy = $evaluationPolicy;
@@ -38,7 +39,8 @@ class CompositeRule extends AbstractRule {
      *
      * @param Rule $rule The rule to add.
      */
-    public function addRule(Rule $rule) {
+    public function addRule(Rule $rule)
+    {
         $this->rules[] = $rule;
     }
 
@@ -47,14 +49,16 @@ class CompositeRule extends AbstractRule {
      *
      * @param RuleOverride $ruleOverride The rule override.
      */
-    public function addRuleOverride(RuleOverride $ruleOverride) {
+    public function addRuleOverride(RuleOverride $ruleOverride)
+    {
         $this->ruleOverrides[] = $ruleOverride;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function evaluate(RuleContext $ruleContext) {
+    public function evaluate(RuleContext $ruleContext)
+    {
         $ruleResults = array();
         // accumulate the results of evaluating the Rules
         foreach ($this->rules as $rule) {

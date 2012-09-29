@@ -7,24 +7,25 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-abstract class AbstractRule implements Rule {
+abstract class AbstractRule implements Rule
+{
     protected $name;
-
 
     /**
      * Create new instance.
      *
      * @param string $name The rule name.
      */
-    public function __construct($name) {
+    public function __construct($name)
+    {
         $this->name = $name;
     }
-
 
     /**
      * {@inheritDoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -33,7 +34,8 @@ abstract class AbstractRule implements Rule {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return '['.get_class($this).' name='.$this->name.']';
     }
 

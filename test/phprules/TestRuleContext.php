@@ -4,9 +4,10 @@ use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\Operator;
 
-class TestRuleContext extends UnitTestCase {
-
-    public function testIncompleteRuleContext() {
+class TestRuleContext extends UnitTestCase
+{
+    public function testIncompleteRuleContext()
+    {
         $rule = new SingleRule('foo');
         $rule->addVariable('var1');
         $rule->addVariable('var2');

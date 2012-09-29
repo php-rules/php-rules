@@ -11,25 +11,27 @@ use phprules\LoaderStrategy;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules.strategy
  */
-abstract class AbstractLoaderStrategy implements LoaderStrategy {
+abstract class AbstractLoaderStrategy implements LoaderStrategy
+{
     protected $rule;
     protected $ruleContext;
 
     /**
      * Create new instance.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->rule = null;
         $this->ruleContext = null;
     }
-
 
     /**
      * Set the associated rule.
      *
      * @param Rule $rule The rule.
      */
-    public function setRule(Rule $rule) {
+    public function setRule(Rule $rule)
+    {
         $this->rule = $rule;
     }
 
@@ -38,18 +40,20 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy {
      *
      * @param RuleContext $ruleContext The rule context.
      */
-    public function setRuleContext(RuleContext $ruleContext) {
+    public function setRuleContext(RuleContext $ruleContext)
+    {
         $this->ruleContext = $ruleContext;
     }
 
     /**
      * Get a rule element value.
      *
-     * @param array $tokens The tokens.
-     * @param mixed $args Optional args.
+     * @param  array $tokens The tokens.
+     * @param  mixed $args   Optional args.
      * @return mixed The value.
      */
-    protected function getRuleElementValue($tokens, $args) {
+    protected function getRuleElementValue($tokens, $args)
+    {
         return $tokens[2];
     }
 
@@ -57,13 +61,14 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy {
      * Process a rule context statement.
      *
      * @param array $tokens The tokens.
-     * @param mixed $args Optional args.
+     * @param mixed $args   Optional args.
      */
-    protected function processRuleContextStatement($tokens, $args) {
+    protected function processRuleContextStatement($tokens, $args)
+    {
         if ('EQUALS' == $tokens[1]) {
             // It's a Variable
             $this->ruleContext->addVariable($tokens[0], $tokens[2]);
-        } else if ('IS' == $tokens[1]) {
+        } elseif ('IS' == $tokens[1]) {
             // It's a Proposition
             $this->ruleContext->addProposition($tokens[0], $tokens[2]);
         }
@@ -72,18 +77,19 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy {
     /**
      * Get statements from the given resource.
      *
-     * @param mixed $resource The resource to load from.
+     * @param  mixed $resource The resource to load from.
      * @return array List of tokens.
      */
-	  protected abstract function getStatements($resource);
+      protected abstract function getStatements($resource);
 
     /**
      * Load rule.
      *
-     * @param mixed $resource The resource to load from.
-     * @return Rule The loaded rule.
+     * @param  mixed $resource The resource to load from.
+     * @return Rule  The loaded rule.
      */
-	  public function loadRule($resource) {
+      public function loadRule($resource)
+      {
         $OPERATOR = 1;
         $STATEMENT = 3;
         $statements = $this->getStatements($resource);
@@ -104,30 +110,33 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy {
     /**
      * Load the rule context.
      *
-     * @param mixed $resource The resource to load from.
-     * @param mixed $args Optional args.
+     * @param  mixed       $resource The resource to load from.
+     * @param  mixed       $args     Optional args.
      * @return RuleContext The loaded rule context.
      */
-    public function loadRuleContext($resource, $args) {
+    public function loadRuleContext($resource, $args)
+    {
         $statements = $this->getStatements($resource);
         foreach ($statements as $tokens) {
             if (count($tokens) == 3) {
                 $this->processRuleContextStatement($tokens, $args);
             }
         }
+
         return $this->ruleContext;
     }
 
     /**
      * Process a rule statement.
      *
-     * @param array $tokens The statement token.
+     * @param array $tokens            The statement token.
      * @param mixed $ruleOrRuleContext Rule or context for this statement.
      */
-    protected function processRuleStatement( $tokens, $ruleOrRuleContext ) {
+    protected function processRuleStatement( $tokens, $ruleOrRuleContext )
+    {
         if ('IS' == $tokens[1]) {
-            $ruleOrRuleContext->addProposition($tokens[0], (bool)$tokens[1]);
-        } else if ('EQUALS' == $tokens[1]) {
+            $ruleOrRuleContext->addProposition($tokens[0], (bool) $tokens[1]);
+        } elseif ('EQUALS' == $tokens[1]) {
             $ruleOrRuleContext->addVariable($tokens[0], $tokens[2]);
         }
     }
@@ -135,10 +144,11 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy {
     /**
      * Process operator statement.
      *
-     * @param array $tokens The statement token.
+     * @param array $tokens            The statement token.
      * @param mixed $ruleOrRuleContext Rule or context for this statement.
      */
-    protected function processOperator($tokens, $ruleOrRuleContext) {
+    protected function processOperator($tokens, $ruleOrRuleContext)
+    {
         $ruleOrRuleContext->addOperator($tokens[0]);
     }
 

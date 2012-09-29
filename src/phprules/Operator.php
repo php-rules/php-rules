@@ -7,7 +7,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class Operator extends RuleElement {
+class Operator extends RuleElement
+{
     const LOGICAL_OR               = 'OR';
     const LOGICAL_AND              = 'AND';
     const LOGICAL_NOT              = 'NOT';
@@ -36,24 +37,24 @@ class Operator extends RuleElement {
         self::NOT_IN
     );
 
-
     /**
      * Create new instance.
      *
      * @param string operator The operator.
      */
-    public function __construct($operator) {
+    public function __construct($operator)
+    {
         parent::__construct($operator);
         if (!in_array($operator, self::$OPERATORS)) {
             throw new \Exception($operator . " is not a valid operator.");
         }
     }
 
-
     /**
      * {@inheritDoc}
      */
-    public function evaluate($stack) {
+    public function evaluate($stack)
+    {
         switch ($this->getName()) {
         case self::LOGICAL_OR:
             $rhs = array_pop($stack);

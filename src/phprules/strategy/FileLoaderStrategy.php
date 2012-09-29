@@ -7,15 +7,16 @@ namespace phprules\strategy;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules.strategy
  */
-class FileLoaderStrategy extends AbstractLoaderStrategy {
-
+class FileLoaderStrategy extends AbstractLoaderStrategy
+{
     /**
      * Get statements from the given resource.
      *
-     * @param mixed $resource The resource to load from.
+     * @param  mixed $resource The resource to load from.
      * @return array List of tokens.
      */
-    protected function getStatements($resource) {
+    protected function getStatements($resource)
+    {
         $lines = array();
         $ruleFile = fopen($resource, 'r');
         if ($ruleFile) {
@@ -30,6 +31,7 @@ class FileLoaderStrategy extends AbstractLoaderStrategy {
             throw new \Exception('Failed to open stream: ' . $resource . ' does not exist.');
         }
         fclose($ruleFile);
+
         return $lines;
     }
 
@@ -38,8 +40,10 @@ class FileLoaderStrategy extends AbstractLoaderStrategy {
      *
      * @return boolean <code>true</code> if the line is a comment.
      */
-    private function isComment($line) {
+    private function isComment($line)
+    {
         $line = trim($line);
+
         return (strstr($line, '#') == $line);
     }
 

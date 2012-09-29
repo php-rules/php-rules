@@ -7,7 +7,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class SingleRule extends AbstractRule {
+class SingleRule extends AbstractRule
+{
     /**
      * The RuleElements that comprise the Rule.
      *
@@ -22,13 +23,13 @@ class SingleRule extends AbstractRule {
      */
     private $stack;
 
-
     /**
      * Create new instance.
      *
      * @param string $name The rule name.
      */
-    public function __construct($name) {
+    public function __construct($name)
+    {
         parent::__construct($name);
         $this->elements = array();
     }
@@ -36,20 +37,22 @@ class SingleRule extends AbstractRule {
     /**
      * Adds a proposition.
      *
-     * @param string $name The propositions statement.
+     * @param string  $name   The propositions statement.
      * @param boolean $result Optional proposition result; default is <code>false</code>.
      */
-    public function addProposition($name, $result=false) {
+    public function addProposition($name, $result=false)
+    {
         $this->elements[] = new Proposition($name, $result);
     }
 
     /**
      * Adds a variable.
      *
-     * @param string $name The name.
-     * @param mixed $value The value; default is <code>null</code>.
+     * @param string $name  The name.
+     * @param mixed  $value The value; default is <code>null</code>.
      */
-    public function addVariable($name, $value=null) {
+    public function addVariable($name, $value=null)
+    {
         $this->elements[] = new Variable($name, $value);
     }
 
@@ -58,7 +61,8 @@ class SingleRule extends AbstractRule {
      *
      * @param string $operator The Boolean or quantifier operator.
      */
-    public function addOperator($operator) {
+    public function addOperator($operator)
+    {
         $this->elements[] = new Operator($operator);
     }
 
@@ -67,16 +71,19 @@ class SingleRule extends AbstractRule {
      *
      * @return array List of <code>RuleElement</code> instances.
      */
-    public function getElements() {
+    public function getElements()
+    {
         return $this->elements;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function evaluate(RuleContext $ruleContext) {
+    public function evaluate(RuleContext $ruleContext)
+    {
         $this->stack = array();
         $this->applyRuleContext($ruleContext);
+
         return $this->evaluateElements();
     }
 
@@ -85,7 +92,8 @@ class SingleRule extends AbstractRule {
      *
      * @param RuleContext $ruleContext The context in which to evaluate this rule.
      */
-    protected function applyRuleContext(RuleContext $ruleContext) {
+    protected function applyRuleContext(RuleContext $ruleContext)
+    {
         foreach ($this->elements as $element) {
             // TODO: move into RuleElement
             if ($element instanceof Proposition || $element instanceof Variable) {
@@ -104,7 +112,8 @@ class SingleRule extends AbstractRule {
      *
      * @return RuleElement The final result.
      */
-    private function evaluateElements() {
+    private function evaluateElements()
+    {
         foreach ($this->elements as $element) {
             $this->stack = $element->evaluate($this->stack);
         }
@@ -117,7 +126,8 @@ class SingleRule extends AbstractRule {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         $result = $this->name . "\n";
         foreach ($this->elements as $element) {
             $result .= $element . "\n";

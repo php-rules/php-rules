@@ -7,14 +7,15 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-class Variable extends RuleElement {
+class Variable extends RuleElement
+{
     public $value;
-
 
     /**
      * Constructor initializes {@link $name}, and the {@link $value}.
      */
-    public function __construct($name, $value) {
+    public function __construct($name, $value)
+    {
         parent::__construct($name);
         $this->value = $value;
     }
@@ -24,7 +25,8 @@ class Variable extends RuleElement {
      *
      * @return boolean The truth value.
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
@@ -33,103 +35,120 @@ class Variable extends RuleElement {
      *
      * @param boolean value The truth value.
      */
-    public function setValue($value) {
+    public function setValue($value)
+    {
         $this->value = $value;
     }
 
     /**
      * Determines whether another Variable's value is equal to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function equalTo(Variable $variable) {
+    public function equalTo(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " == " . $variable->getName() . " )";
         $truthValue = ($this->value == $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether another Variable's value is <em>not</em> equal to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function notEqualTo(Variable $variable) {
+    public function notEqualTo(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " != " . $variable->getName() . " )";
         $truthValue = ($this->value != $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether another Variable's value is less than to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function lessThan(Variable $variable) {
+    public function lessThan(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " < " . $variable->getName() . " )";
         $truthValue = ($this->value < $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether another Variable's value is less than or equal to to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function lessThanOrEqualTo(Variable $variable) {
+    public function lessThanOrEqualTo(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " <= " . $variable->getName() . " )";
         $truthValue = ($this->value <= $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether another Variable's value is greater than to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function greaterThan(Variable $variable) {
+    public function greaterThan(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " > " . $variable->getName() . " )";
         $truthValue = ($this->value > $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether another Variable's value is greater than or equal to its own value.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function greaterThanOrEqualTo(Variable $variable) {
+    public function greaterThanOrEqualTo(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " >= " . $variable->getName() . " )";
         $truthValue = ($this->value >= $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether this value is in another Variable.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function in(Variable $variable) {
+    public function in(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
         $truthValue = is_array($variable->value) && in_array($this->value, $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
     /**
      * Determines whether this value is not in another Variable.
      *
-     * @param Variable $variable
+     * @param  Variable    $variable
      * @return Proposition
      */
-    public function notIn(Variable $variable) {
+    public function notIn(Variable $variable)
+    {
         $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
         $truthValue = !is_array($variable->value) || !in_array($this->value, $variable->value);
+
         return new Proposition($statement, $truthValue);
     }
 
@@ -138,7 +157,8 @@ class Variable extends RuleElement {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return "[Variable name=" . $this->getName() . ", value=" . $this->value . "]";
     }
 

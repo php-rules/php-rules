@@ -7,8 +7,8 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-interface LoaderStrategy {
-
+interface LoaderStrategy
+{
     /**
      * Set the associated rule.
      *
@@ -26,16 +26,16 @@ interface LoaderStrategy {
     /**
      * Load rule.
      *
-     * @param mixed $resource The resource to load from.
-     * @return Rule The loaded rule.
+     * @param  mixed $resource The resource to load from.
+     * @return Rule  The loaded rule.
      */
     public function loadRule($resource);
 
     /**
      * Load the rule context.
      *
-     * @param mixed $resource The resource to load from.
-     * @param mixed $args Optional args.
+     * @param  mixed       $resource The resource to load from.
+     * @param  mixed       $args     Optional args.
      * @return RuleContext The loaded rule context.
      */
     public function loadRuleContext($resource, $args);

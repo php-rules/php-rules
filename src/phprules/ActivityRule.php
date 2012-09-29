@@ -8,28 +8,30 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @package phprules
  */
-abstract class ActivityRule extends SingleRule {
-
+abstract class ActivityRule extends SingleRule
+{
     /**
      * Create new instance.
      *
      * @param string $name The rule name.
      */
-    public function __construct($name) {
+    public function __construct($name)
+    {
         parent::__construct($name);
     }
 
     /**
      * Execute this activity rule.
      */
-    public abstract function execute();
+    abstract public function execute();
 
     /**
      * {@inheritDoc}
      *
      * <p>If the result of evaluation is <code>true</code>, then the activity is executed.</p>
      */
-    public function evaluate(RuleContext $ruleContext) {
+    public function evaluate(RuleContext $ruleContext)
+    {
         $result = parent::evaluate($ruleContext);
 
         if ($result->getValue()) {
@@ -37,6 +39,6 @@ abstract class ActivityRule extends SingleRule {
         }
 
         return $result;
-	  }
+      }
 
 }
