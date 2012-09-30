@@ -7,7 +7,7 @@ namespace phprules;
  * <p>Allows to override the result of a rule as denoted by the given <code>$ruleName</code>.</p>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class RuleOverride
 {

@@ -5,7 +5,7 @@ namespace phprules;
  * Loader strategy interface.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 interface LoaderStrategy
 {

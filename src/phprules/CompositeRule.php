@@ -8,7 +8,7 @@ namespace phprules;
  * evaluation policy.</p>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class CompositeRule extends AbstractRule
 {

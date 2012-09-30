@@ -7,7 +7,7 @@ namespace phprules;
  * <p><code>RuleLoader</code> uses the strategy pattern so you define custom algorithms for loading <code>Rule</code>s and <code>RuleContexts</code>.</p>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class RuleLoader
 {

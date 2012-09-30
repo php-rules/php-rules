@@ -6,7 +6,7 @@ namespace phprules;
  * activity when it evaluates to <code>true</code>.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 abstract class ActivityRule extends SingleRule
 {

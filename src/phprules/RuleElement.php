@@ -5,7 +5,7 @@ namespace phprules;
  * Represents an element of a Rule or RuleContext.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 abstract class RuleElement
 {

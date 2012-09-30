@@ -5,7 +5,7 @@ namespace phprules;
  * Abstract <code>Rule</code> ase class.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 abstract class AbstractRule implements Rule
 {

@@ -5,7 +5,7 @@ namespace phprules\strategy;
  * Strategy pattern for loading a Rule from a text file.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules.strategy
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class FileLoaderStrategy extends AbstractLoaderStrategy
 {

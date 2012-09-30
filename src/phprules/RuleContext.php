@@ -8,7 +8,7 @@ namespace phprules;
  *  Variables but not Operators.</p>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class RuleContext
 {

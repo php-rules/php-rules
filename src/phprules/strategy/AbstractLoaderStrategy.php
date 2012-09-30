@@ -9,7 +9,7 @@ use phprules\LoaderStrategy;
  * Abstract base loader strategy.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules.strategy
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 abstract class AbstractLoaderStrategy implements LoaderStrategy
 {

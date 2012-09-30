@@ -4,10 +4,11 @@ namespace phprules;
 /**
  * A symbol that represents Date values.
  *
- * <p>DateVariable encapulates {@link http://us2.php.net/manual/en/function.strtotime.php strtotime}, which parses any English textual datetime description into a Unix timestamp.</p>
+ * <p>DateVariable encapulates {@link http://us2.php.net/manual/en/function.strtotime.php strtotime},
+ *  which parses any English textual datetime description into a Unix timestamp.</p>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class DateVariable extends Variable
 {

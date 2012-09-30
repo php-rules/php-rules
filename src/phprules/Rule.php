@@ -11,7 +11,7 @@ namespace phprules;
  * </ol>
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 interface Rule
 {

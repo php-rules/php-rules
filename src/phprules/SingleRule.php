@@ -5,7 +5,7 @@ namespace phprules;
  * A single rule.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class SingleRule extends AbstractRule
 {

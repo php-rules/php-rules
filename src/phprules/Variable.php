@@ -5,7 +5,7 @@ namespace phprules;
  * A symbol that represents a value.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class Variable extends RuleElement
 {

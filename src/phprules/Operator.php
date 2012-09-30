@@ -5,7 +5,7 @@ namespace phprules;
  * Represents a Boolean operator or a quantifier operator.
  *
  * @author Greg Swindle <greg@swindle.net>
- * @package phprules
+ * @author Martin Rademacher <mano@radebatz.net>
  */
 class Operator extends RuleElement
 {
