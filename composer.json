@@ -1,7 +1,10 @@
 {
     "name": "radebatz/phprules",
     "description": "PHP Rules is a rule engine that models formal propositional logic.",
-    "license": "MIT",
+    "license": [
+        "MIT",
+        "GPL-2.0"
+    ],
     "homepage": "http://swindle.net/php-rules/",
     "authors": [
         {
