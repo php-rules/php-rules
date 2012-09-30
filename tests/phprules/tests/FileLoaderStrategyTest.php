@@ -5,8 +5,6 @@ use phprules\Proposition;
 use phprules\RuleLoader;
 use phprules\strategy\FileLoaderStrategy;
 
-define ('FCPATH', dirname(__FILE__).'/');
-
 class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -14,7 +12,7 @@ class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->loader = new RuleLoader();
         $this->strategy = new FileLoaderStrategy();
-        $this->dataFolderPath = FCPATH.'data/';
+        $this->dataFolderPath = __DIR__.'/data';
     }
 
     public function testConstructors()
@@ -31,7 +29,7 @@ class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
     public function test_RuleLoader_loadRule()
     {
         $this->loader->setStrategy($this->strategy);
-        $rule = $this->loader->loadRule($this->dataFolderPath . 'SuitableForUpgrade.rul');
+        $rule = $this->loader->loadRule($this->dataFolderPath . '/SuitableForUpgrade.rul');
 
         $this->assertNotNull($rule);
         $this->assertNotNull($rule->getElements());
@@ -41,7 +39,7 @@ class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
     public function test_RuleLoader_loadRuleContext()
     {
         $this->loader->setStrategy($this->strategy);
-        $ruleContext = $this->loader->loadRuleContext($this->dataFolderPath . 'SuitableForUpgrade.con',4);
+        $ruleContext = $this->loader->loadRuleContext($this->dataFolderPath . '/SuitableForUpgrade.con', 4);
 
         $this->assertNotNull($ruleContext);
         $this->assertNotNull($ruleContext->elements);
@@ -51,8 +49,8 @@ class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
     public function test_RuleLoader_evaluate()
     {
         $this->loader->setStrategy($this->strategy);
-        $rule = $this->loader->loadRule($this->dataFolderPath . 'SuitableForUpgrade.rul');
-        $ruleContext = $this->loader->loadRuleContext($this->dataFolderPath . 'SuitableForUpgrade.con',4);
+        $rule = $this->loader->loadRule($this->dataFolderPath . '/SuitableForUpgrade.rul');
+        $ruleContext = $this->loader->loadRuleContext($this->dataFolderPath . '/SuitableForUpgrade.con',4);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertNotNull($p);
