@@ -70,7 +70,7 @@ class RuleContext
     public function append($ruleContext)
     {
         foreach ($ruleContext->elements as $e) {
-          $this->elements[ $e->getName() ] = $e;
+            $this->elements[ $e->getName() ] = $e;
         }
     }
 

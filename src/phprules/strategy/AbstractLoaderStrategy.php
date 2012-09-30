@@ -80,7 +80,7 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy
      * @param  mixed $resource The resource to load from.
      * @return array List of tokens.
      */
-      protected abstract function getStatements($resource);
+    protected abstract function getStatements($resource);
 
     /**
      * Load rule.
@@ -88,8 +88,8 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy
      * @param  mixed $resource The resource to load from.
      * @return Rule  The loaded rule.
      */
-      public function loadRule($resource)
-      {
+    public function loadRule($resource)
+    {
         $OPERATOR = 1;
         $STATEMENT = 3;
         $statements = $this->getStatements($resource);
@@ -132,7 +132,7 @@ abstract class AbstractLoaderStrategy implements LoaderStrategy
      * @param array $tokens            The statement token.
      * @param mixed $ruleOrRuleContext Rule or context for this statement.
      */
-    protected function processRuleStatement( $tokens, $ruleOrRuleContext )
+    protected function processRuleStatement($tokens, $ruleOrRuleContext)
     {
         if ('IS' == $tokens[1]) {
             $ruleOrRuleContext->addProposition($tokens[0], (bool) $tokens[1]);

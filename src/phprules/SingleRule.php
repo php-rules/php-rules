@@ -1,6 +1,8 @@
 <?php
 namespace phprules;
 
+use Exception;
+
 /**
  * A single rule.
  *
@@ -40,7 +42,7 @@ class SingleRule extends AbstractRule
      * @param string  $name   The propositions statement.
      * @param boolean $result Optional proposition result; default is <code>false</code>.
      */
-    public function addProposition($name, $result=false)
+    public function addProposition($name, $result = false)
     {
         $this->elements[] = new Proposition($name, $result);
     }
@@ -51,7 +53,7 @@ class SingleRule extends AbstractRule
      * @param string $name  The name.
      * @param mixed  $value The value; default is <code>null</code>.
      */
-    public function addVariable($name, $value=null)
+    public function addVariable($name, $value = null)
     {
         $this->elements[] = new Variable($name, $value);
     }
@@ -101,7 +103,7 @@ class SingleRule extends AbstractRule
                 if ($contextElement) {
                     $element->setValue($contextElement->getValue());
                 } else {
-                    throw new \Exception('Incomplete rule context, missing: ' . $element->getName());
+                    throw new Exception('Incomplete rule context, missing: ' . $element->getName());
                 }
             }
         }

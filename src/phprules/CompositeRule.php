@@ -12,7 +12,7 @@ namespace phprules;
  */
 class CompositeRule extends AbstractRule
 {
-    const EVALUATE_OR = 'EVALUATE_OR';
+    const EVALUATE_OR =  'EVALUATE_OR';
     const EVALUATE_AND = 'EVALUATE_AND';
 
     private $rules;
@@ -25,7 +25,7 @@ class CompositeRule extends AbstractRule
      * @param string $name             The name.
      * @param string $evaluationPolicy The evaluation policy; default is <code>CompositeRule::EVALUATE_AND</code>.
      */
-    public function __construct($name, $evaluationPolicy=self::EVALUATE_AND)
+    public function __construct($name, $evaluationPolicy = self::EVALUATE_AND)
     {
         parent::__construct($name);
         $this->name = $name;
@@ -76,13 +76,13 @@ class CompositeRule extends AbstractRule
 
         // work out the final result
         switch ($this->evaluationPolicy) {
-        case self::EVALUATE_AND:
+        case static::EVALUATE_AND:
             $finalResult = true;
             foreach ($ruleResults as $result) {
                 $finalResult = ($finalResult && $result->getValue());
             }
             break;
-        case self::EVALUATE_OR:
+        case static::EVALUATE_OR:
             $finalResult = false;
             foreach ($ruleResults as $result) {
                 if ($result->getValue()) {

@@ -1,6 +1,8 @@
 <?php
 namespace phprules;
 
+use Exception;
+
 /**
  * Represents a Boolean operator or a quantifier operator.
  *
@@ -46,7 +48,7 @@ class Operator extends RuleElement
     {
         parent::__construct($operator);
         if (!in_array($operator, self::$OPERATORS)) {
-            throw new \Exception($operator . " is not a valid operator.");
+            throw new Exception($operator . " is not a valid operator.");
         }
     }
 

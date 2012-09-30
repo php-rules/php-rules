@@ -1,6 +1,8 @@
 <?php
 namespace phprules\strategy;
 
+use Exception;
+
 /**
  * Strategy pattern for loading a Rule from a text file.
  *
@@ -28,7 +30,7 @@ class FileLoaderStrategy extends AbstractLoaderStrategy
               }
             }
         } else {
-            throw new \Exception('Failed to open stream: ' . $resource . ' does not exist.');
+            throw new Exception('Failed to open stream: ' . $resource . ' does not exist.');
         }
         fclose($ruleFile);
 
