@@ -27,8 +27,7 @@
     "autoload": {
         "psr-0": {
             "phprules": "src/"
-        },
-        "classmap": ["test/phprules"]
+        }
     },
     "minimum-stability": "dev"
 }
