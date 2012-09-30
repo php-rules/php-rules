@@ -23,7 +23,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
     public function testVariableInt_equalTo()
     {
         $v = new Variable('actNumbPeople',10);
-        $this->assertTrue($this->vInt->equalTo($v));
+        $this->assertTrue($this->vInt->equalTo($v)->getValue());
     }
 
     public function testVariableInt_notEqualTo()
@@ -92,7 +92,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
     public function testVariableStr_equalTo()
     {
         $v = new Variable('actTicketType','firstClass');
-        $this->assertTrue($this->vStr->equalTo($v));
+        $this->assertTrue($this->vStr->equalTo($v)->getValue());
     }
 
     public function testVariableStr_notEqualTo()
@@ -161,7 +161,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
     public function testVariableFlt_equalTo()
     {
         $v = new Variable('retail',99.95);
-        $this->assertTrue($this->vFlt->equalTo($v));
+        $this->assertTrue($this->vFlt->equalTo($v)->getValue());
     }
 
     public function testVariableFlt_notEqualTo()

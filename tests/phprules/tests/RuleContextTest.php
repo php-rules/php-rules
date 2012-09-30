@@ -1,6 +1,7 @@
 <?php
 namespace phprules\tests;
 
+use Exception;
 use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\Operator;
