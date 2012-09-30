@@ -1,20 +1,21 @@
 <?php
+namespace phprules\tests;
 
 use phprules\Proposition;
 
-class TestProposition extends UnitTestCase
+class PropositionTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-    parent::setUp();
+        parent::setUp();
         $this->p  = new Proposition('goldCardHolder', TRUE);
         $this->p1 = new Proposition('silverCardHolder', TRUE);
         $this->p2 = new Proposition('isInFirstClass', FALSE);
-  }
+    }
 
     public function testPropositionName()
     {
-        $this->assertEqual($this->p->getName(), 'goldCardHolder');
+        $this->assertEquals($this->p->getName(), 'goldCardHolder');
     }
 
     public function testPropositionValue()
@@ -25,7 +26,7 @@ class TestProposition extends UnitTestCase
     public function testPropositionToString()
     {
         $msg = '[Proposition statement=goldCardHolder, value=true]';
-        $this->assertEqual($this->p, $msg);
+        $this->assertEquals($this->p, $msg);
     }
 
     public function testPropositionLogicalAndTrue()

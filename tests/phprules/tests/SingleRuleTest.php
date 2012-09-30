@@ -1,17 +1,18 @@
 <?php
+namespace phprules\tests;
 
 use phprules\Operator;
 use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
 
-class TestSingleRule extends UnitTestCase
+class SingleRuleTest extends \PHPUnit_Framework_TestCase
 {
     public function testRuleName()
     {
         $rule = new SingleRule('testRuleName');
         $expected = 'testRuleName';
-        $this->assertEqual($expected, $rule->getName());
+        $this->assertEquals($expected, $rule->getName());
     }
 
     // Test Integer Variable Evaluations

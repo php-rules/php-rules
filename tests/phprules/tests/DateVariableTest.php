@@ -1,12 +1,13 @@
 <?php
+namespace phprules\tests;
 
 use phprules\DateVariable;
 
-class TestDateVariable extends UnitTestCase
+class DateVariableTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-    parent::setUp();
+        parent::setUp();
         $this->date = new DateVariable('dateNow','now');
     }
 

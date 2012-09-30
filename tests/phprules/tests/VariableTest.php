@@ -1,22 +1,23 @@
 <?php
+namespace phprules\tests;
 
 use phprules\Variable;
 
-class TestVariable extends UnitTestCase
+class VariableTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-    parent::setUp();
+        parent::setUp();
         $this->vInt = new Variable('maxNumPeople', 10);
         $this->vStr = new Variable('ticketType', 'firstClass');
         $this->vFlt = new Variable('saleAmount', 99.95);
-  }
+    }
 
     // Integer data type tests
 
     public function testVariableInt_toString()
     {
-        $this->assertEqual($this->vInt, '[Variable name=maxNumPeople, value=10]');
+        $this->assertEquals($this->vInt, '[Variable name=maxNumPeople, value=10]');
     }
 
     public function testVariableInt_equalTo()
@@ -85,7 +86,7 @@ class TestVariable extends UnitTestCase
 
     public function testVariableStr_toString()
     {
-        $this->assertEqual($this->vStr, '[Variable name=ticketType, value=firstClass]');
+        $this->assertEquals($this->vStr, '[Variable name=ticketType, value=firstClass]');
     }
 
     public function testVariableStr_equalTo()
@@ -154,7 +155,7 @@ class TestVariable extends UnitTestCase
 
     public function testVariableFlt_toString()
     {
-        $this->assertEqual($this->vFlt, '[Variable name=saleAmount, value=99.95]');
+        $this->assertEquals($this->vFlt, '[Variable name=saleAmount, value=99.95]');
     }
 
     public function testVariableFlt_equalTo()

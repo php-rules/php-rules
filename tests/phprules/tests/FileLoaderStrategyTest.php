@@ -1,19 +1,21 @@
 <?php
+namespace phprules\tests;
 
 use phprules\Proposition;
 use phprules\RuleLoader;
 use phprules\strategy\FileLoaderStrategy;
 
 define ('FCPATH', dirname(__FILE__).'/');
-class TestFileLoaderStrategy extends UnitTestCase
+
+class FileLoaderStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-    parent::setUp();
+        parent::setUp();
         $this->loader = new RuleLoader();
         $this->strategy = new FileLoaderStrategy();
         $this->dataFolderPath = FCPATH.'data/';
-  }
+    }
 
     public function testConstructors()
     {
@@ -33,7 +35,7 @@ class TestFileLoaderStrategy extends UnitTestCase
 
         $this->assertNotNull($rule);
         $this->assertNotNull($rule->getElements());
-        $this->assertEqual(9, count($rule->getElements()));
+        $this->assertEquals(9, count($rule->getElements()));
     }
 
     public function test_RuleLoader_loadRuleContext()
@@ -43,7 +45,7 @@ class TestFileLoaderStrategy extends UnitTestCase
 
         $this->assertNotNull($ruleContext);
         $this->assertNotNull($ruleContext->elements);
-        $this->assertEqual(5, count($ruleContext->elements));
+        $this->assertEquals(5, count($ruleContext->elements));
     }
 
     public function test_RuleLoader_evaluate()

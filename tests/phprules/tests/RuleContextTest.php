@@ -1,11 +1,13 @@
 <?php
+namespace phprules\tests;
 
 use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\Operator;
 
-class TestRuleContext extends UnitTestCase
+class RuleContextTest extends \PHPUnit_Framework_TestCase
 {
+
     public function testIncompleteRuleContext()
     {
         $rule = new SingleRule('foo');
@@ -21,7 +23,7 @@ class TestRuleContext extends UnitTestCase
             $proposition = $rule->evaluate($ruleContext);
             $this->fail('expected incomplete context exception');
         } catch (Exception $e) {
-            $this->assertEqual('Incomplete rule context, missing: var2', $e->getMessage());
+            $this->assertEquals('Incomplete rule context, missing: var2', $e->getMessage());
         }
 
         $ruleContext->addVariable('var2', 'bar');

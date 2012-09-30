@@ -1,11 +1,12 @@
 <?php
+namespace phprules\tests;
 
 use phprules\Operator;
 use phprules\SingleRule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
 
-class TestCompositeRule extends UnitTestCase
+class CompositeRuleTest extends \PHPUnit_Framework_TestCase
 {
     public function testAnd()
     {
