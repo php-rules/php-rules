@@ -19,13 +19,13 @@ class Proposition extends RuleElement
     /**
      * Create new instance.
      *
-     * @param string  $name       The name.
-     * @param boolean $truthValue The truth value.
+     * @param string  $name  The name.
+     * @param boolean $value The truth value.
      */
-    public function __construct($name, $truthValue)
+    public function __construct($name, $value)
     {
         parent::__construct($name);
-        $this->value = $truthValue;
+        $this->value = $value;
     }
 
     /**

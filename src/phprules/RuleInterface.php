@@ -13,7 +13,7 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @author Martin Rademacher <mano@radebatz.net>
  */
-interface Rule
+interface RuleInterface
 {
     /**
      * Get the name of this rule.

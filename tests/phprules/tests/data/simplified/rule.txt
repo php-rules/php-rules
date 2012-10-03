@@ -1,0 +1,11 @@
+# a rule using the new simplified notation
+
+BOOL A
+VAR B
+CONST bar
+EQUALTO
+OR
+VAR C
+CONST foo
+EQUALTO
+AND

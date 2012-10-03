@@ -1,0 +1,3 @@
+A IS true
+B IS true
+C IS false

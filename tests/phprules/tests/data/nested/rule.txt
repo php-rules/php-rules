@@ -1,0 +1,8 @@
+# nested conditions
+# ( C OR ( B AND A ) )
+
+A IS true
+B IS true
+AND
+C IS false
+OR

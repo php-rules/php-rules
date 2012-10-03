@@ -14,7 +14,7 @@ abstract class RuleElement
      *
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * Create new element.

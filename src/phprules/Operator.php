@@ -47,7 +47,7 @@ class Operator extends RuleElement
     public function __construct($operator)
     {
         parent::__construct($operator);
-        if (!in_array($operator, self::$OPERATORS)) {
+        if (!in_array($operator, static::$OPERATORS)) {
             throw new Exception($operator . " is not a valid operator.");
         }
     }
@@ -58,61 +58,61 @@ class Operator extends RuleElement
     public function evaluate($stack)
     {
         switch ($this->getName()) {
-        case self::LOGICAL_OR:
+        case static::LOGICAL_OR:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->logicalOr($lhs);
             break;
-        case self::LOGICAL_AND:
+        case static::LOGICAL_AND:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->logicalAnd($lhs);
             break;
-        case self::LOGICAL_NOT:
+        case static::LOGICAL_NOT:
             $rhs = array_pop($stack);
             $stack[] = $rhs->logicalNot();
             break;
-        case self::LOGICAL_XOR:
+        case static::LOGICAL_XOR:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->logicalXor($lhs);
             break;
-        case self::EQUAL_TO:
+        case static::EQUAL_TO:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->equalTo($lhs);
             break;
-        case self::NOT_EQUAL_TO:
+        case static::NOT_EQUAL_TO:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->notEqualTo($lhs);
             break;
-        case self::LESS_THAN:
+        case static::LESS_THAN:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->lessThan($lhs);
             break;
-        case self::LESS_THAN_OR_EQUAL_TO:
+        case static::LESS_THAN_OR_EQUAL_TO:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->lessThanOrEqualTo($lhs);
             break;
-        case self::GREATER_THAN:
+        case static::GREATER_THAN:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->greaterThan($lhs);
             break;
-        case self::GREATER_THAN_OR_EQUAL_TO:
+        case static::GREATER_THAN_OR_EQUAL_TO:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->greaterThanOrEqualTo($lhs);
             break;
-        case self::IN:
+        case static::IN:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->in($lhs);
             break;
-        case self::NOT_IN:
+        case static::NOT_IN:
             $rhs = array_pop($stack);
             $lhs = array_pop($stack);
             $stack[] = $rhs->NotIn($lhs);

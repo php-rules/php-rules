@@ -39,7 +39,7 @@ class CompositeRule extends AbstractRule
      *
      * @param Rule $rule The rule to add.
      */
-    public function addRule(Rule $rule)
+    public function addRule(RuleInterface $rule)
     {
         $this->rules[] = $rule;
     }

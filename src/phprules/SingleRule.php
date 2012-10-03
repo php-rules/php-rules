@@ -4,7 +4,7 @@ namespace phprules;
 use Exception;
 
 /**
- * A single rule.
+ * A rule.
  *
  * @author Greg Swindle <greg@swindle.net>
  * @author Martin Rademacher <mano@radebatz.net>
@@ -98,7 +98,7 @@ class SingleRule extends AbstractRule
     {
         foreach ($this->elements as $element) {
             // TODO: move into RuleElement
-            if ($element instanceof Proposition || $element instanceof Variable) {
+            if (($element instanceof Proposition || $element instanceof Variable) && $element->getName()) {
                 $contextElement = $ruleContext->findElement($element->getName());
                 if ($contextElement) {
                     $element->setValue($contextElement->getValue());

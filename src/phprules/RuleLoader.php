@@ -41,9 +41,9 @@ class RuleLoader
     /**
      * Set the loader strategy to be used.
      *
-     * @param LoaderStrategy $loaderStrategy The loader strategy.
+     * @param LoaderStrategyInterface $loaderStrategy The loader strategy.
      */
-    public function setStrategy(LoaderStrategy $loaderStrategy)
+    public function setStrategy(LoaderStrategyInterface $loaderStrategy)
     {
         $this->loaderStrategy = $loaderStrategy;
         $loaderStrategy->setRule($this->rule);
@@ -65,10 +65,10 @@ class RuleLoader
      * Load the rule context.
      *
      * @param  mixed       $resource The resource to load from.
-     * @param  mixed       $args     Optional args.
+     * @param  mixed       $args     Optional args; default is <code>null</code>.
      * @return RuleContext The loaded rule context.
      */
-    public function loadRuleContext($resource, $args)
+    public function loadRuleContext($resource, $args = null)
     {
         return $this->loaderStrategy->loadRuleContext($resource, $args);
     }

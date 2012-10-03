@@ -31,6 +31,14 @@ class Variable extends RuleElement
     }
 
     /**
+     * Get the name to be used in the statement.
+     */
+    protected function getStatementName()
+    {
+        return $this->name ?: "'".$this->value."'";
+    }
+
+    /**
      * Set the truth value of this value.
      *
      * @param boolean value The truth value.
@@ -48,7 +56,7 @@ class Variable extends RuleElement
      */
     public function equalTo(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " == " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " == " . $variable->getName() . " )";
         $truthValue = ($this->value == $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -62,7 +70,7 @@ class Variable extends RuleElement
      */
     public function notEqualTo(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " != " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " != " . $variable->getName() . " )";
         $truthValue = ($this->value != $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -76,7 +84,7 @@ class Variable extends RuleElement
      */
     public function lessThan(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " < " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " < " . $variable->getName() . " )";
         $truthValue = ($this->value < $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -90,7 +98,7 @@ class Variable extends RuleElement
      */
     public function lessThanOrEqualTo(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " <= " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " <= " . $variable->getName() . " )";
         $truthValue = ($this->value <= $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -104,7 +112,7 @@ class Variable extends RuleElement
      */
     public function greaterThan(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " > " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " > " . $variable->getName() . " )";
         $truthValue = ($this->value > $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -118,7 +126,7 @@ class Variable extends RuleElement
      */
     public function greaterThanOrEqualTo(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " >= " . $variable->getName() . " )";
+        $statement = "( " . $this->getStatementName() . " >= " . $variable->getName() . " )";
         $truthValue = ($this->value >= $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -132,7 +140,7 @@ class Variable extends RuleElement
      */
     public function in(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
+        $statement = "( " . $this->getStatementName() . " IN (" . $variable->getName() . ") )";
         $truthValue = is_array($variable->value) && in_array($this->value, $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -146,7 +154,7 @@ class Variable extends RuleElement
      */
     public function notIn(Variable $variable)
     {
-        $statement = "( " . $this->getName() . " IN (" . $variable->getName() . ") )";
+        $statement = "( " . $this->getStatementName() . " IN (" . $variable->getName() . ") )";
         $truthValue = !is_array($variable->value) || !in_array($this->value, $variable->value);
 
         return new Proposition($statement, $truthValue);
@@ -159,7 +167,7 @@ class Variable extends RuleElement
      */
     public function __toString()
     {
-        return "[Variable name=" . $this->getName() . ", value=" . $this->value . "]";
+        return "[Variable name=" . $this->getStatementName() . ", value=" . $this->value . "]";
     }
 
 }

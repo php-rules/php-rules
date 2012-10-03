@@ -7,7 +7,7 @@ namespace phprules;
  * @author Greg Swindle <greg@swindle.net>
  * @author Martin Rademacher <mano@radebatz.net>
  */
-abstract class AbstractRule implements Rule
+abstract class AbstractRule implements RuleInterface
 {
     protected $name;
 
