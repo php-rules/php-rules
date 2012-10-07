@@ -2,7 +2,7 @@
 namespace phprules\tests;
 
 use Exception;
-use phprules\SingleRule;
+use phprules\Rule;
 use phprules\RuleContext;
 use phprules\Operator;
 
@@ -11,7 +11,7 @@ class RuleContextTest extends \PHPUnit_Framework_TestCase
 
     public function testIncompleteRuleContext()
     {
-        $rule = new SingleRule('foo');
+        $rule = new Rule('foo');
         $rule->addVariable('var1');
         $rule->addVariable('var2');
         $rule->addOperator(Operator::EQUAL_TO);

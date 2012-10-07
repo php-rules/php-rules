@@ -39,7 +39,7 @@ abstract class RuleElement
     /**
      * Evalute this rule element.
      *
-     * <p>In the context of a <code>SingleRule</code> this means returning something to be pushed to the
+     * <p>In the context of a <code>Rule</code> this means returning something to be pushed to the
      *  processing stack.</p>
      * <p>The default behaviour is to return a reference to the this rule element - <code>$this</code>.</p>
      *

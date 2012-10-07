@@ -2,7 +2,7 @@
 namespace phprules\tests;
 
 use phprules\Operator;
-use phprules\SingleRule;
+use phprules\Rule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
 
@@ -11,13 +11,13 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
     public function testAnd()
     {
         // rule A
-        $ruleA = new SingleRule('ruleA');
+        $ruleA = new Rule('ruleA');
         $ruleA->addVariable('varA1');
         $ruleA->addVariable('varA2');
         $ruleA->addOperator(Operator::EQUAL_TO);
 
         // rule B
-        $ruleB = new SingleRule('ruleB');
+        $ruleB = new Rule('ruleB');
         $ruleB->addVariable('varB1');
         $ruleB->addVariable('varB2');
         $ruleB->addOperator(Operator::NOT_EQUAL_TO);
@@ -58,13 +58,13 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
     public function testOr()
     {
         // rule A
-        $ruleA = new SingleRule('ruleA');
+        $ruleA = new Rule('ruleA');
         $ruleA->addVariable('varA1');
         $ruleA->addVariable('varA2');
         $ruleA->addOperator(Operator::EQUAL_TO);
 
         // rule B
-        $ruleB = new SingleRule('ruleB');
+        $ruleB = new Rule('ruleB');
         $ruleB->addVariable('varB1');
         $ruleB->addVariable('varB2');
         $ruleB->addOperator(Operator::NOT_EQUAL_TO);
