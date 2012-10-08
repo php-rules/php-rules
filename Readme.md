@@ -1,6 +1,6 @@
 # PHPi Rules #
 
-[![Build Status](https://travis-ci.org/DerManoMann/phprules.png)](https://travis-ci.org/DerManoMann]/phprules])
+[![Build Status](https://travis-ci.org/DerManoMann/phprules.png)](https://travis-ci.org/DerManoMann/phprules)
 
 PHPRules  is a PHP 5.3 fork of the [php-rules](http://www.swindle.net/php-rules/) project.
 
