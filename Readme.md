@@ -1,17 +1,12 @@
-# PHP Rules #
+# PHPi Rules #
 
-## What is is? ##
-This is a PHP 5.3 update of the [php-rules](http://www.swindle.net/php-rules/) project.
+[![Build Status](https://travis-ci.org/DerManoMann/phprules.png)](https://travis-ci.org/DerManoMann]/phprules])
 
-The code is based on the php-rules-sample-v0.2-codeigniter package.
+PHPRules  is a PHP 5.3 fork of the [php-rules](http://www.swindle.net/php-rules/) project.
 
+## Getting started ##
+"PHP Rules is a rule engine that models formal propositional logic. It allows you to 
+separate conditional logic from source code and database triggers in a reusable package, 
+where explicit rules can be independently defined and managed."
 
-## Modifications ##
-* Cleaned up code a bit, incl. some reformatting
-* removed PHP4 style constructor methods
-* renamed toString() to __toString()
-* added namespace
-* removed SqlFileLoaderStrategy class
-* reorganized files to have filenames match class/interface names
-* added IN operator
-* cleaned up phpdoc headers and removed duplicate information
+[...more](http://www.swindle.net/php-rules/tutorials/getting-started))
