@@ -2,78 +2,111 @@
 namespace phprules\tests;
 
 use phprules\DateVariable;
+use phprules\Rule;
+use phprules\RuleContext;
+use phprules\operators\Comparison;
+use phprules\operators\Logical;
 
 class DateVariableTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        $this->date = new DateVariable('dateNow','now');
+        $this->date = new DateVariable('dateNow', 'now');
     }
 
-    public function testConstructor()
-    {
-        $this->assertNotNull($this->date);
-    }
-
-    public function test_DateVariable_equalTo()
+    /**
+     * Test equalTo.
+     */
+    public function testEqualTo()
     {
         $now = new DateVariable('dateNow', 'now');
-        $p = $this->date->equalTo($now);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($now);
+        $rule->addOperator(Comparison::EQUAL_TO);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
 
-    public function test_DateVariable_notEqualTo()
+    /**
+     * Test not equalTo.
+     */
+    public function testNotEqualTo()
     {
         $then = new DateVariable('dateThen', '2011-01-01');
-        $p = $this->date->notEqualTo($then);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($then);
+        $rule->addOperator(Comparison::EQUAL_TO);
+        $rule->addOperator(Logical::LOGICAL_NOT);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
+
         $lastWednesday = new DateVariable('lastWednesday', 'last lastWednesday');
-        $p = $this->date->notEqualTo($lastWednesday);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($lastWednesday);
+        $rule->addOperator(Comparison::EQUAL_TO);
+        $rule->addOperator(Logical::LOGICAL_NOT);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
 
-    public function test_DateVariable_lessThan()
+    /**
+     * Test lessThan.
+     */
+    public function testLessThan()
     {
         $then = new DateVariable('dateThen', '2011-01-01');
-        $p = $then->lessThan($this->date);
-        $this->assertTrue($p->value);
-        $lastWednesday = new DateVariable('lastWednesday', 'last lastWednesday');
-        $p = $lastWednesday->lessThan($this->date);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($then);
+        $rule->addOperator(Comparison::LESS_THAN);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
 
-    public function test_DateVariable_lessThanOrEqualTo()
+    /**
+     * Test lessThanOrEqualTo.
+     */
+    public function testLessThanOrEqualTo()
     {
         $now = new DateVariable('dateNow', 'now');
-        $p = $this->date->lessThanOrEqualTo($now);
-        $then = new DateVariable('dateThen', '2011-01-01');
-        $p = $then->lessThanOrEqualTo($this->date);
-        $this->assertTrue($p->value);
-        $lastWednesday = new DateVariable('lastWednesday', 'last lastWednesday');
-        $p = $lastWednesday->lessThanOrEqualTo($this->date);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($now);
+        $rule->addOperator(Comparison::LESS_THAN_OR_EQUAL_TO);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
 
-    public function test_DateVariable_greaterThan ()
+    /**
+     * Test greaterThan.
+     */
+    public function testGreaterThan()
     {
         $then = new DateVariable('dateThen', '2011-01-01');
-        $p = $this->date->greaterThan ($then);
-        $this->assertTrue($p->value);
-        $lastWednesday = new DateVariable('lastWednesday', 'last lastWednesday');
-        $p = $this->date->greaterThan ($lastWednesday);
+        $rule = new Rule('test');
+        $rule->addVariable($then);
+        $rule->addVariable($this->date);
+        $rule->addOperator(Comparison::GREATER_THAN);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
 
-    public function test_DateVariable_greaterThanOrEqualTo ()
+    /**
+     * Test greaterThanOrEqualTo.
+     */
+    public function testGreaterThanOrEqualTo()
     {
         $now = new DateVariable('dateNow', 'now');
-        $p = $now->greaterThanOrEqualTo ($this->date);
-        $then = new DateVariable('dateThen', '2011-01-01');
-        $p = $this->date->greaterThanOrEqualTo ($then);
-        $this->assertTrue($p->value);
-        $lastWednesday = new DateVariable('lastWednesday', 'last lastWednesday');
-        $p = $this->date->greaterThanOrEqualTo ($lastWednesday);
+        $rule = new Rule('test');
+        $rule->addVariable($this->date);
+        $rule->addVariable($now);
+        $rule->addOperator(Comparison::GREATER_THAN_OR_EQUAL_TO);
+        $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
     }
+
 }

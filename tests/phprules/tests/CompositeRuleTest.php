@@ -1,7 +1,8 @@
 <?php
 namespace phprules\tests;
 
-use phprules\Operator;
+use phprules\operators\Comparison;
+use phprules\operators\Logical;
 use phprules\Rule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
@@ -14,45 +15,48 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
         $ruleA = new Rule('ruleA');
         $ruleA->addVariable('varA1');
         $ruleA->addVariable('varA2');
-        $ruleA->addOperator(Operator::EQUAL_TO);
+        $ruleA->addOperator(Comparison::EQUAL_TO);
 
         // rule B
         $ruleB = new Rule('ruleB');
         $ruleB->addVariable('varB1');
         $ruleB->addVariable('varB2');
-        $ruleB->addOperator(Operator::NOT_EQUAL_TO);
+        $ruleB->addOperator(Comparison::EQUAL_TO);
+        $ruleB->addOperator(Logical::LOGICAL_NOT);
 
         // put together
-        $compositeRule = new CompositeRule('compositeRule', CompositeRule::EVALUATE_AND);
+        $compositeRule = new CompositeRule('compositeRule', Logical::LOGICAL_AND);
         $compositeRule->addRule($ruleA);
         $compositeRule->addRule($ruleB);
 
         // the context
-        $ruleContext = new RuleContext('ruleContext');
-        $ruleContext->addVariable('varA1', 'yoo');
-        $ruleContext->addVariable('varA2', 'yoo');
-        $ruleContext->addVariable('varB1', 'foo');
-        $ruleContext->addVariable('varB2', 'bar');
+        $ruleContext = new RuleContext();
+        $ruleContext->addElement('varA1', 'yoo');
+        $ruleContext->addElement('varA2', 'yoo');
+        $ruleContext->addElement('varB1', 'foo');
+        $ruleContext->addElement('varB2', 'bar');
 
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
+        $this->assertEquals('( ( varA2 == varA1 ) AND ( NOT ( varB2 == varB1 ) ) )', $result->getName());
 
         // make A fail
-        $ruleContext->addVariable('varA2', 'xxx');
+        $ruleContext->addElement('varA2', 'xxx');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertFalse($result->value);
 
         // make B fail
-        $ruleContext->addVariable('varA2', 'yoo');
-        $ruleContext->addVariable('varB2', 'foo');
+        $ruleContext->addElement('varA2', 'yoo');
+        $ruleContext->addElement('varB2', 'foo');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertFalse($result->value);
 
         // make A and B fail
-        $ruleContext->addVariable('varA2', 'xxx');
-        $ruleContext->addVariable('varB2', 'foo');
+        $ruleContext->addElement('varA2', 'xxx');
+        $ruleContext->addElement('varB2', 'foo');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertFalse($result->value);
+        $this->assertEquals('( ( varA2 == varA1 ) AND ( NOT ( varB2 == varB1 ) ) )', $result->getName());
     }
 
     public function testOr()
@@ -61,43 +65,46 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
         $ruleA = new Rule('ruleA');
         $ruleA->addVariable('varA1');
         $ruleA->addVariable('varA2');
-        $ruleA->addOperator(Operator::EQUAL_TO);
+        $ruleA->addOperator(Comparison::EQUAL_TO);
 
         // rule B
         $ruleB = new Rule('ruleB');
         $ruleB->addVariable('varB1');
         $ruleB->addVariable('varB2');
-        $ruleB->addOperator(Operator::NOT_EQUAL_TO);
+        $ruleB->addOperator(Comparison::EQUAL_TO);
+        $ruleB->addOperator(Logical::LOGICAL_NOT);
 
         // put together
-        $compositeRule = new CompositeRule('compositeRule', CompositeRule::EVALUATE_OR);
+        $compositeRule = new CompositeRule('compositeRule', Logical::LOGICAL_OR);
         $compositeRule->addRule($ruleA);
         $compositeRule->addRule($ruleB);
 
         // the context
-        $ruleContext = new RuleContext('ruleContext');
-        $ruleContext->addVariable('varA1', 'yoo');
-        $ruleContext->addVariable('varA2', 'yoo');
-        $ruleContext->addVariable('varB1', 'foo');
-        $ruleContext->addVariable('varB2', 'bar');
+        $ruleContext = new RuleContext(array(
+            'varA1' => 'yoo',
+            'varA2' => 'yoo',
+            'varB1' => 'foo',
+            'varB2' => 'bar',
+        ));
 
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
+        $this->assertEquals('( ( varA2 == varA1 ) OR ( NOT ( varB2 == varB1 ) ) )', $result->getName());
 
         // make A fail
-        $ruleContext->addVariable('varA2', 'xxx');
+        $ruleContext->addElement('varA2', 'xxx');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
 
         // make B fail
-        $ruleContext->addVariable('varA2', 'yoo');
-        $ruleContext->addVariable('varB2', 'foo');
+        $ruleContext->addElement('varA2', 'yoo');
+        $ruleContext->addElement('varB2', 'foo');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
 
         // make A and B fail
-        $ruleContext->addVariable('varA2', 'xxx');
-        $ruleContext->addVariable('varB2', 'foo');
+        $ruleContext->addElement('varA2', 'xxx');
+        $ruleContext->addElement('varB2', 'foo');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertFalse($result->value);
     }

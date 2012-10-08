@@ -18,16 +18,16 @@ interface RuleInterface
     /**
      * Get the name of this rule.
      *
-     * @return string The unique rule name.
+     * @return string The name.
      */
     public function getName();
 
     /**
-     * Evaluate this rule within the given context.
+     * Evaluate this rule in the given context.
      *
-     * @param  RuleContext $ruleContext The context in which to evaluate this rule.
-     * @return Proposition
+     * @param RuleContext $ruleContext The context; default is <code>null</code> for none.
+     * @return boolean The result.
      */
-    public function evaluate(RuleContext $ruleContext);
+    public function evaluate(RuleContext $ruleContext = null);
 
 }

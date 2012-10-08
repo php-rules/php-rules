@@ -12,54 +12,62 @@ namespace phprules;
  */
 class RuleContext
 {
-    public $name;
-    public $elements;
+    private $elements;
+    private $name;
 
     /**
      * Create new context.
      *
-     * @param string $name The context name.
+     * @param array $elements The elements; default is an empty array.
+     * @param string $name Optional context name; default is an empty string.
      */
-    public function __construct($name='')
+    public function __construct($elements = array(), $name = '')
     {
+        $this->elements = $elements;
         $this->name = $name;
-        // elements is a dictionary - a set of {name, value} pairs
-        // The names are Proposition or Variable names and
-        // the values are the Propositions or Variables themselves
-        $this->elements = array();
     }
 
     /**
-     * Adds a Proposition to the array of {@link $elements}.
+     * Adds an element.
      *
-     * @param string  $statement The Proposition's statement.
-     * @param boolean $value     Whether the Proposition is TRUE or FALSE.
+     * @param string $name  The element's name.
+     * @param mixed  $value The element's value.
      */
-    public function addProposition($statement, $value)
+    public function addElement($name, $value)
     {
-        $this->elements[$statement] = new Proposition($statement, $value);
+        $this->elements[$name] = $value;
     }
 
     /**
-     * Adds a Variable to the array of {@link $elements}.
+     * Get all element.
      *
-     * @param string $name  The Variable's name.
-     * @param mixed  $value The Variable's value.
+     * @param array All elements.
      */
-    public function addVariable($name, $value)
+    public function getElements()
     {
-        $this->elements[ $name ] = new Variable($name, $value);
+        return $this->elements;
     }
 
     /**
-     * Find and return a RuleElement by name, if it exists.
+     * Get an element value.
      *
-     * @param  string      $name The name (i.e., "key") of the RuleElement.
-     * @return RuleElement
+     * @param  string $name The name (i.e., "key") of the element.
+     * @return mixed The value or <code>null</code>.
      */
-    public function findElement($name)
+    public function getElement($name)
     {
         return array_key_exists($name, $this->elements) ? $this->elements[$name] : null;
+    }
+
+    /**
+     * Test if an element for the given name exits.
+     *
+     * @param  string $name The name (i.e., "key") of the element.
+     * @return boolean <code>true</code> if it exits, <code>false</code> otherwise.
+     */
+    public function hasElement($name)
+    {
+        return array_key_exists($name, $this->elements);
     }
 
     /**
@@ -67,26 +75,26 @@ class RuleContext
      *
      * @paaram RuleContext $ruleContext The context to append.
      */
-    public function append($ruleContext)
+    public function append(RuleContext $ruleContext)
     {
-        foreach ($ruleContext->elements as $e) {
-            $this->elements[ $e->getName() ] = $e;
+        foreach ($ruleContext->elements as $name => $value) {
+            $this->elements[$name] = $value;
         }
     }
 
     /**
-     * Returns an infixed, readable representation of the RuleContext.
+     * Returns a human-readable statement and value.
      *
      * @return string
      */
     public function __toString()
     {
-        $result = "";
-        foreach (array_values($this->elements) as $e) {
-            $result = $result . $e . "\n";
+        $elements = array();
+        foreach ($this->elements as $name => $value) {
+            $elements[] = sprintf('%s=%s', $name, is_bool($value) ? ($value ? 'true' : 'false') : $value);
         }
 
-        return $result;
+        return "[".get_class($this)." elements=[" . implode(', ', $elements) . "]]";
     }
 
 }

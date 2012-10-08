@@ -139,9 +139,9 @@ class RuleLoader
     protected function processRuleContextStatement($tokens, $ruleContext)
     {
         if ('EQUALS' == $tokens[1]) {
-            $ruleContext->addVariable($tokens[0], $tokens[2]);
+            $ruleContext->addElement($tokens[0], $tokens[2]);
         } elseif ('IS' == $tokens[1]) {
-            $ruleContext->addProposition($tokens[0], $tokens[2] == 'true');
+            $ruleContext->addElement($tokens[0], $tokens[2] == 'true');
         } else if ($tokens) {
             throw new InvalidArgumentException('Invalid token');
         }

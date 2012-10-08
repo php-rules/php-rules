@@ -2,96 +2,43 @@
 namespace phprules\tests;
 
 use phprules\Proposition;
+use phprules\Rule;
+use phprules\RuleContext;
+use phprules\operators\Logical;
 
 class PropositionTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        $this->p  = new Proposition('goldCardHolder', TRUE);
-        $this->p1 = new Proposition('silverCardHolder', TRUE);
-        $this->p2 = new Proposition('isInFirstClass', FALSE);
+        $this->pg = new Proposition('goldCardHolder', true);
+        $this->ps = new Proposition('silverCardHolder', true);
+        $this->pff = new Proposition('isInFirstClass', false);
     }
 
     public function testPropositionName()
     {
-        $this->assertEquals($this->p->getName(), 'goldCardHolder');
+        $this->assertEquals($this->pg->getName(), 'goldCardHolder');
     }
 
     public function testPropositionValue()
     {
-        $this->assertTrue($this->p->value);
+        $this->assertTrue($this->pg->getValue());
     }
 
     public function testPropositionToString()
     {
-        $msg = '[Proposition statement=goldCardHolder, value=true]';
-        $this->assertEquals($this->p, $msg);
+        $this->assertEquals('[phprules\Proposition statement=goldCardHolder, value=true]', $this->pg);
     }
 
-    public function testPropositionLogicalAndTrue()
+    public function testAndTrue()
     {
-        $p = $this->p->logicalAnd($this->p1);
-        $this->assertTrue($p->value);
+        $rule = new Rule('test');
+        $rule->addProposition($this->pg);
+        $rule->addProposition($this->ps);
+        $rule->addOperator(Logical::LOGICAL_AND);
+        $p = $rule->evaluate(new RuleContext());
+        $this->assertTrue($p->getValue());
     }
 
-    public function testPropositionLogicalAndFalse()
-    {
-        $p = $this->p->logicalAnd($this->p2);
-        $this->assertFalse($p->value);
-    }
-
-    public function testPropositionLogicalOr_1_True_1_True()
-    {
-        $p = $this->p->logicalOr($this->p2);
-        $this->assertTrue($p->value);
-    }
-
-    public function testPropositionLogicalOr_1_True_1_False()
-    {
-        $p = $this->p2->logicalOr($this->p);
-        $this->assertTrue($p->value);
-    }
-
-    public function testPropositionLogicalOr_1_False_1_False()
-    {
-        $p = $this->p2->logicalOr($this->p2);
-        $this->assertFalse($p->value);
-    }
-
-    public function testPropositionLogicalNot_True()
-    {
-        $p = $this->p2->logicalNot();
-        $this->assertTrue($p->value);
-    }
-
-    public function testPropositionLogicalNot_False()
-    {
-        $p = $this->p->logicalNot();
-        $this->assertFalse($p->value);
-    }
-
-    public function testPropositionLogicalXor_True_True_FALSE()
-    {
-        $p = $this->p->logicalXor($this->p1);
-        $this->assertFalse($p->value);
-    }
-
-    public function testPropositionLogicalXor_False_True_TRUE()
-    {
-        $p = $this->p2->logicalXor($this->p1);
-        $this->assertTrue($p->value);
-    }
-
-    public function testPropositionLogicalXor_True_False_TRUE()
-    {
-        $p = $this->p1->logicalXor($this->p2);
-        $this->assertTrue($p->value);
-    }
-
-    public function testPropositionLogicalXor_False_False_FALSE()
-    {
-        $p = $this->p->logicalXor($this->p1);
-        $this->assertFalse($p->value);
-    }
 }

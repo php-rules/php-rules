@@ -24,13 +24,21 @@ class DateVariable extends Variable
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return null;
+    }
+
+    /**
      * Returns a human-readable statement and value.
      * @access public
      * @return string
      */
     public function __toString()
     {
-        return "[DateVariable name=" . $this->name . ", value=" . $this->value . "]";
+        return "[".get_class($this)." name=" . $this->name . ", value=" . $this->value . "]";
     }
 
 }

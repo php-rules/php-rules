@@ -4,7 +4,7 @@ namespace phprules\tests;
 use Exception;
 use phprules\Rule;
 use phprules\RuleContext;
-use phprules\Operator;
+use phprules\operators\Comparison;
 
 class RuleContextTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,20 +14,20 @@ class RuleContextTest extends \PHPUnit_Framework_TestCase
         $rule = new Rule('foo');
         $rule->addVariable('var1');
         $rule->addVariable('var2');
-        $rule->addOperator(Operator::EQUAL_TO);
+        $rule->addOperator(Comparison::EQUAL_TO);
 
         // the actual values...
         $ruleContext = new RuleContext();
-        $ruleContext->addVariable('var1', 'foo');
+        $ruleContext->addElement('var1', 'foo');
 
         try {
             $proposition = $rule->evaluate($ruleContext);
             $this->fail('expected incomplete context exception');
         } catch (Exception $e) {
-            $this->assertEquals('Incomplete rule context, missing: var2', $e->getMessage());
+            $this->assertEquals('incomplete context, missing value for: var2', $e->getMessage());
         }
 
-        $ruleContext->addVariable('var2', 'bar');
+        $ruleContext->addElement('var2', 'bar');
         // try again
         try {
             $proposition = $rule->evaluate($ruleContext);

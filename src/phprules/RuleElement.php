@@ -1,6 +1,8 @@
 <?php
 namespace phprules;
 
+use InvalidArgumentException;
+
 /**
  * Represents an element of a Rule or RuleContext.
  *
@@ -34,6 +36,21 @@ abstract class RuleElement
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Apply the given context to this element.
+     *
+     * <p>If appropriate, take the actual value for this element from the rule context.
+     */
+    public function applyRuleContext(RuleContext $ruleContext) {
+        if (!$ruleContext->hasElement($this->name)) {
+            if (null === $this->getValue()) {
+                throw new InvalidArgumentException(sprintf('incomplete context, missing value for: %s', $this->name));
+            }
+        } else {
+            $this->value = $ruleContext->getElement($this->name);
+        }
     }
 
     /**

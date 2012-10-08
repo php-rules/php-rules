@@ -1,7 +1,6 @@
 <?php
 namespace phprules;
 
-use Exception;
 
 /**
  * A rule.
@@ -39,23 +38,33 @@ class Rule extends AbstractRule
     /**
      * Adds a proposition.
      *
-     * @param string  $name   The propositions statement.
-     * @param boolean $result Optional proposition result; default is <code>false</code>.
+     * @param mixed $proposition The propositions statement or a <code>Proposition</code>.
+     * @param boolean $result    Optional proposition result; default is <code>false</code> - ignored if <code>$name</code>
+     *  is a <code>Proposition</code>.
      */
-    public function addProposition($name, $result = false)
+    public function addProposition($proposition, $result = false)
     {
-        $this->elements[] = new Proposition($name, $result);
+        if ($proposition instanceof Proposition) {
+            $this->elements[] = $proposition;
+        } else {
+            $this->elements[] = new Proposition($proposition, $result);
+        }
     }
 
     /**
      * Adds a variable.
      *
-     * @param string $name  The name.
-     * @param mixed  $value The value; default is <code>null</code>.
+     * @param mixed $variable  The name or a <code>Variable</code> instance.
+     * @param mixed $value     The value; default is <code>null</code> - ignored if <code>$name</code>
+     *  is a <code>Variable</code>.
      */
-    public function addVariable($name, $value = null)
+    public function addVariable($variable, $value = null)
     {
-        $this->elements[] = new Variable($name, $value);
+        if ($variable instanceof Variable) {
+            $this->elements[] = $variable;
+        } else {
+            $this->elements[] = new Variable($variable, $value);
+        }
     }
 
     /**
@@ -69,7 +78,7 @@ class Rule extends AbstractRule
     }
 
     /**
-     * Get all elements.
+     * Get all elements of this rule.
      *
      * @return array List of <code>RuleElement</code> instances.
      */
@@ -81,32 +90,18 @@ class Rule extends AbstractRule
     /**
      * {@inheritDoc}
      */
-    public function evaluate(RuleContext $ruleContext)
+    public function evaluate(RuleContext $ruleContext = null)
     {
         $this->stack = array();
-        $this->applyRuleContext($ruleContext);
-
-        return $this->evaluateElements();
-    }
-
-    /**
-     * Apply rule context to all elements.
-     *
-     * @param RuleContext $ruleContext The context in which to evaluate this rule.
-     */
-    protected function applyRuleContext(RuleContext $ruleContext)
-    {
-        foreach ($this->elements as $element) {
-            // TODO: move into RuleElement
-            if (($element instanceof Proposition || $element instanceof Variable) && $element->getName()) {
-                $contextElement = $ruleContext->findElement($element->getName());
-                if ($contextElement) {
-                    $element->setValue($contextElement->getValue());
-                } else {
-                    throw new Exception('Incomplete rule context, missing: ' . $element->getName());
+        if ($ruleContext) {
+            foreach ($this->elements as $name => $element) {
+                if ($element instanceof Proposition || $element instanceof Variable) {
+                    $element->applyRuleContext($ruleContext);
                 }
             }
         }
+
+        return $this->evaluateElements();
     }
 
     /**

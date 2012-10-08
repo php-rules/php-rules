@@ -33,7 +33,7 @@ class Variable extends RuleElement
     /**
      * Get the name to be used in the statement.
      */
-    protected function getStatementName()
+    public function getStatementName()
     {
         return $this->name ?: "'".$this->value."'";
     }
@@ -49,125 +49,13 @@ class Variable extends RuleElement
     }
 
     /**
-     * Determines whether another Variable's value is equal to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function equalTo(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " == " . $variable->getName() . " )";
-        $truthValue = ($this->value == $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether another Variable's value is <em>not</em> equal to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function notEqualTo(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " != " . $variable->getName() . " )";
-        $truthValue = ($this->value != $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether another Variable's value is less than to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function lessThan(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " < " . $variable->getName() . " )";
-        $truthValue = ($this->value < $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether another Variable's value is less than or equal to to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function lessThanOrEqualTo(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " <= " . $variable->getName() . " )";
-        $truthValue = ($this->value <= $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether another Variable's value is greater than to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function greaterThan(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " > " . $variable->getName() . " )";
-        $truthValue = ($this->value > $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether another Variable's value is greater than or equal to its own value.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function greaterThanOrEqualTo(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " >= " . $variable->getName() . " )";
-        $truthValue = ($this->value >= $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether this value is in another Variable.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function in(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " IN (" . $variable->getName() . ") )";
-        $truthValue = is_array($variable->value) && in_array($this->value, $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
-     * Determines whether this value is not in another Variable.
-     *
-     * @param  Variable    $variable
-     * @return Proposition
-     */
-    public function notIn(Variable $variable)
-    {
-        $statement = "( " . $this->getStatementName() . " IN (" . $variable->getName() . ") )";
-        $truthValue = !is_array($variable->value) || !in_array($this->value, $variable->value);
-
-        return new Proposition($statement, $truthValue);
-    }
-
-    /**
      * Returns a human-readable statement and value.
      *
      * @return string
      */
     public function __toString()
     {
-        return "[Variable name=" . $this->getStatementName() . ", value=" . $this->value . "]";
+        return "[".get_class($this)." name=" . $this->getStatementName() . ", value=" . $this->value . "]";
     }
 
 }

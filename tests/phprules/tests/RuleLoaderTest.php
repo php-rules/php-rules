@@ -28,8 +28,8 @@ class RuleLoaderTest extends \PHPUnit_Framework_TestCase
         $ruleContext = $this->loader->loadRuleContext(new FileSource($this->dataFolderPath.'/sfu/context-true.txt'));
 
         $this->assertNotNull($ruleContext);
-        $this->assertNotNull($ruleContext->elements);
-        $this->assertEquals(5, count($ruleContext->elements));
+        $this->assertNotNull($ruleContext->getElements());
+        $this->assertEquals(5, count($ruleContext->getElements()));
     }
 
     /**

@@ -49,68 +49,13 @@ class Proposition extends RuleElement
     }
 
     /**
-     * Performs a Boolean AND operation on another {@link Proposition}
-     *
-     * @param  Proposition $proposition
-     * @return Proposition
-     */
-    public function logicalAnd(Proposition $proposition)
-    {
-        $resultName  = "( " . $this->getName() . " AND " . $proposition->getName() . " )";
-        $resultValue = ($this->value and $proposition->value);
-
-        return new Proposition($resultName, $resultValue);
-    }
-
-    /**
-     * Performs a Boolean OR operation on another {@link Proposition}
-     *
-     * @param  Proposition $proposition
-     * @return Proposition
-     */
-    public function logicalOr(Proposition $proposition)
-    {
-        $resultName  = "( " . $this->getName() . " OR " . $proposition->getName() . " )";
-        $resultValue = ($this->value or $proposition->value);
-
-        return new Proposition( $resultName, $resultValue );
-    }
-
-    /**
-     * Performs a Boolean NOT operation its own value
-     *
-     * @return Proposition
-     */
-    public function logicalNot()
-    {
-        $resultName  = "( NOT " . $this->getName() . " )";
-        $resultValue = (!$this->value);
-
-        return new Proposition($resultName, $resultValue);
-    }
-
-    /**
-     * Performs a Boolean XOR operation on another {@link Proposition}
-     *
-     * @param  Proposition $proposition
-     * @return Proposition
-     */
-    public function logicalXor(Proposition $proposition)
-    {
-        $resultName  = "( " . $this->getName() . " XOR " . $proposition->getName() . " )";
-        $resultValue = ($this->value xor $proposition->value);
-
-        return new Proposition($resultName, $resultValue);
-    }
-
-    /**
      * Returns a human-readable statement and value.
      *
      * @return string
      */
     public function __toString()
     {
-        return "[Proposition statement=" . $this->getName() . ", value=" . ($this->getValue() ? "true" : "false") . "]";
+        return "[".get_class($this)." statement=" . $this->getName() . ", value=" . ($this->getValue() ? "true" : "false") . "]";
     }
 
 }

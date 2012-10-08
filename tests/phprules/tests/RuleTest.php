@@ -1,7 +1,9 @@
 <?php
 namespace phprules\tests;
 
-use phprules\Operator;
+use phprules\operators\Comparison;
+use phprules\operators\In;
+use phprules\operators\Logical;
 use phprules\Rule;
 use phprules\RuleContext;
 use phprules\CompositeRule;
@@ -29,17 +31,16 @@ class RuleTest extends \PHPUnit_Framework_TestCase
 
         // Compare the two, i.e.,
         // minNumPeople >= actualNumPeople
-        //$rule->addOperator('GREATERTHANOREQUALTO');
-        $rule->addOperator(Operator::GREATER_THAN_OR_EQUAL_TO);
+        $rule->addOperator(Comparison::GREATER_THAN_OR_EQUAL_TO);
 
         // Create a RuleContext, i.e., a "Fact"
-        $ruleContext = new RuleContext('eligibleForGroupDiscountFact');
+        $ruleContext = new RuleContext();
 
         // Declare the minimun number of people required for discount
-        $ruleContext->addVariable('minNumPeople', 6);
+        $ruleContext->addElement('minNumPeople', 6);
 
         // How many people are there?
-        $ruleContext->addVariable('actualNumPeople', 5);
+        $ruleContext->addElement('actualNumPeople', 5);
 
         // Evaluate
         $result = $rule->evaluate($ruleContext);
@@ -61,17 +62,16 @@ class RuleTest extends \PHPUnit_Framework_TestCase
 
         // Compare the two, i.e.,
         // actTotal >= minTotal
-        //$rule->addOperator('GREATERTHANOREQUALTO');
-        $rule->addOperator(Operator::GREATER_THAN_OR_EQUAL_TO);
+        $rule->addOperator(Comparison::GREATER_THAN_OR_EQUAL_TO);
 
         // Create a RuleContext, i.e., a "Fact"
-        $ruleContext = new RuleContext('eligibleForGroupDiscountFact');
+        $ruleContext = new RuleContext();
 
         // How many people are there?
-        $ruleContext->addVariable('actTotal', 102.83);
+        $ruleContext->addElement('actTotal', 102.83);
 
         // Declare the minimun number of people required for discount
-        $ruleContext->addVariable('minTotal', 100.01);
+        $ruleContext->addElement('minTotal', 100.01);
 
         // Evaluate
         $result = $rule->evaluate($ruleContext);
@@ -93,17 +93,16 @@ class RuleTest extends \PHPUnit_Framework_TestCase
 
         // Compare the two, i.e.,
         // actTotal >= minTotal
-        //$rule->addOperator('GREATERTHANOREQUALTO');
-        $rule->addOperator(Operator::GREATER_THAN_OR_EQUAL_TO);
+        $rule->addOperator(Comparison::GREATER_THAN_OR_EQUAL_TO);
 
         // Create a RuleContext, i.e., a "Fact"
-        $ruleContext = new RuleContext('eligibleForGroupDiscountFact');
+        $ruleContext = new RuleContext();
 
         // How many people are there?
-        $ruleContext->addVariable('actTotal', 102.83);
+        $ruleContext->addElement('actTotal', 102.83);
 
         // Declare the minimun number of people required for discount
-        $ruleContext->addVariable('minTotal', 100.01);
+        $ruleContext->addElement('minTotal', 100.01);
 
         // Evaluate
         $result = $rule->evaluate($ruleContext);
@@ -117,19 +116,19 @@ class RuleTest extends \PHPUnit_Framework_TestCase
       $brandRule = new Rule('brandRule');
       $brandRule->addVariable('brandList', array());
       $brandRule->addVariable('brand', null);
-      $brandRule->addOperator("IN");
+      $brandRule->addOperator(In::IN);
 
       // there might be other rules, etc to add...
       $finalRuleSet = new CompositeRule ('finalRuleSet');
       $finalRuleSet->addRule($brandRule);
 
       // the actual values...
-      $brandRuleSetContext = new RuleContext('brandRuleSetContex');
-      $brandRuleSetContext->addVariable('brand', 'yoo');
-      $brandRuleSetContext->addVariable('brandList', array('yoo', 'foo', 'bar'));
+      $brandRuleSetContext = new RuleContext();
+      $brandRuleSetContext->addElement('brand', 'yoo');
+      $brandRuleSetContext->addElement('brandList', array('yoo', 'foo', 'bar'));
 
       // collect all variables
-      $finalRuleSetContext = new RuleContext('finalRuleSetContex');
+      $finalRuleSetContext = new RuleContext();
       $finalRuleSetContext->append($brandRuleSetContext);
 
       $proposition = $finalRuleSet->evaluate($finalRuleSetContext);
@@ -150,7 +149,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     {
         $rule = $this->getRuleIsEligibleForUpgrade();
         $ruleContext = $this->getRuleContextIsEligibleForUpgrade();
-        $ruleContext->elements['passengerIsEconomy']->value = FALSE;
+        $ruleContext->addElement('passengerIsEconomy', false);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertFalse($p->value);
@@ -160,7 +159,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     {
         $rule = $this->getRuleIsEligibleForUpgrade();
         $ruleContext = $this->getRuleContextIsEligibleForUpgrade();
-        $ruleContext->elements['passengerIsGoldCardHolder']->value = FALSE;
+        $ruleContext->addElement('passengerIsGoldCardHolder', false);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertTrue($p->value);
@@ -170,7 +169,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     {
         $rule = $this->getRuleIsEligibleForUpgrade();
         $ruleContext = $this->getRuleContextIsEligibleForUpgrade();
-        $ruleContext->elements['passengerIsSilverCardHolder']->value = FALSE;
+        $ruleContext->addElement('passengerIsSilverCardHolder', false);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertTrue($p->value);
@@ -180,8 +179,8 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     {
         $rule = $this->getRuleIsEligibleForUpgrade();
         $ruleContext = $this->getRuleContextIsEligibleForUpgrade();
-        $ruleContext->elements['passengerIsGoldCardHolder']->value = FALSE;
-        $ruleContext->elements['passengerIsSilverCardHolder']->value = FALSE;
+        $ruleContext->addElement('passengerIsGoldCardHolder', false);
+        $ruleContext->addElement('passengerIsSilverCardHolder', false);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertFalse($p->value);
@@ -191,7 +190,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     {
         $rule = $this->getRuleIsEligibleForUpgrade();
         $ruleContext = $this->getRuleContextIsEligibleForUpgrade();
-        $ruleContext->elements['passengerCarryOnBaggageWeight']->value = 15.1;
+        $ruleContext->addElement('passengerCarryOnBaggageWeight', 15.1);
         $p = $rule->evaluate($ruleContext);
 
         $this->assertFalse($p->value);
@@ -203,24 +202,24 @@ class RuleTest extends \PHPUnit_Framework_TestCase
         $rule->addProposition('passengerIsEconomy', TRUE);
         $rule->addProposition('passengerIsGoldCardHolder', TRUE);
         $rule->addProposition('passengerIsSilverCardHolder', TRUE);
-        $rule->addOperator(Operator::LOGICAL_OR);
-        $rule->addOperator(Operator::LOGICAL_AND);
+        $rule->addOperator(Logical::LOGICAL_OR);
+        $rule->addOperator(Logical::LOGICAL_AND);
         $rule->addVariable('passengerCarryOnBaggageAllowance', 15.0);
         $rule->addVariable('passengerCarryOnBaggageWeight', 10.0);
-        $rule->addOperator(Operator::LESS_THAN_OR_EQUAL_TO);
-        $rule->addOperator(Operator::LOGICAL_AND);
+        $rule->addOperator(Comparison::LESS_THAN_OR_EQUAL_TO);
+        $rule->addOperator(Logical::LOGICAL_AND);
 
         return $rule;
     }
 
     private function getRuleContextIsEligibleForUpgrade()
     {
-        $ruleContext = new RuleContext('IsEligibleForUpgrade');
-        $ruleContext->addProposition('passengerIsEconomy', TRUE);
-        $ruleContext->addProposition('passengerIsGoldCardHolder', TRUE);
-        $ruleContext->addProposition('passengerIsSilverCardHolder', TRUE);
-        $ruleContext->addVariable('passengerCarryOnBaggageAllowance', 15.0);
-        $ruleContext->addVariable('passengerCarryOnBaggageWeight', 10.0);
+        $ruleContext = new RuleContext();
+        $ruleContext->addElement('passengerIsEconomy', TRUE);
+        $ruleContext->addElement('passengerIsGoldCardHolder', TRUE);
+        $ruleContext->addElement('passengerIsSilverCardHolder', TRUE);
+        $ruleContext->addElement('passengerCarryOnBaggageAllowance', 15.0);
+        $ruleContext->addElement('passengerCarryOnBaggageWeight', 10.0);
 
         return $ruleContext;
     }
