@@ -6,7 +6,7 @@ passengerIsGoldCardHolder IS true
 passengerIsSilverCardHolder IS true
 OR
 AND
-passengerCarryOnBaggageAllowance EQUALS x
 passengerCarryOnBaggageWeight EQUALS y
+passengerCarryOnBaggageAllowance EQUALS x
 LESSTHANOREQUALTO
 AND

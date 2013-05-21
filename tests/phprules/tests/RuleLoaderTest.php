@@ -36,8 +36,9 @@ class RuleLoaderTest extends \PHPUnit_Framework_TestCase
      * Evaluate a test rule.
      *
      * @param string name The rule directory name.
+     * @param string evaluatedName The evaluated syntax / name of the final proposition; default is <code>null</code>
      */
-    protected function evaluateRule($name)
+    protected function evaluateRule($name, $evaluatedName = null)
     {
         $rule = $this->loader->loadRule(new FileSource($this->dataFolderPath.'/'.$name.'/rule.txt'));
         $ruleContext = $this->loader->loadRuleContext(new FileSource($this->dataFolderPath.'/'.$name.'/context-true.txt'));
@@ -47,6 +48,9 @@ class RuleLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($p instanceof Proposition);
         $this->assertNotNull($p->getName());
         $this->assertTrue($p->value);
+        if ($evaluatedName) {
+            $this->assertEquals($evaluatedName, $p->getName());
+        }
 
         $ruleContext = $this->loader->loadRuleContext(new FileSource($this->dataFolderPath.'/'.$name.'/context-false.txt'));
 
@@ -74,7 +78,17 @@ class RuleLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testSimplified()
     {
-        $this->evaluateRule('simplified');
+        $this->evaluateRule('simplified', "( ( C == 'foo' ) AND ( ( B == 'bar' ) OR A ) )");
+    }
+
+    public function testSimplifiedReverse()
+    {
+        $this->evaluateRule('simplified-reverse', "( ( 'foo' == C ) AND ( ( 'bar' == B ) OR A ) )");
+    }
+
+    public function testCompare()
+    {
+        $this->evaluateRule('compare', "( freeForAll OR ( actualNumPeople >= minNumPeople ) )");
     }
 
 }

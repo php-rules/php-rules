@@ -49,24 +49,24 @@ class Comparison implements OperatorInterface
 
         switch ($operator) {
         case static::EQUAL_TO:
-            $name = sprintf('( %s == %s )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() == $lhs->getValue());
+            $name = sprintf('( %s == %s )', $lhs->getStatementName(), $rhs->getStatementName());
+            $stack[] = new Proposition($name, $lhs->getValue() == $rhs->getValue());
             break;
         case static::LESS_THAN:
-            $name = sprintf('( %s < %s )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() < $lhs->getValue());
+            $name = sprintf('( %s < %s )', $lhs->getStatementName(), $rhs->getStatementName());
+            $stack[] = new Proposition($name, $lhs->getValue() < $rhs->getValue());
             break;
         case static::LESS_THAN_OR_EQUAL_TO:
-            $name = sprintf('( %s <= %s )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() <= $lhs->getValue());
+            $name = sprintf('( %s <= %s )', $lhs->getStatementName(), $rhs->getStatementName());
+            $stack[] = new Proposition($name, $lhs->getValue() <= $rhs->getValue());
             break;
         case static::GREATER_THAN:
-            $name = sprintf('( %s > %s )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() > $lhs->getValue());
+            $name = sprintf('( %s > %s )', $lhs->getStatementName(), $rhs->getStatementName());
+            $stack[] = new Proposition($name, $lhs->getValue() > $rhs->getValue());
             break;
         case static::GREATER_THAN_OR_EQUAL_TO:
-            $name = sprintf('( %s >= %s )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() >= $lhs->getValue());
+            $name = sprintf('( %s >= %s )', $lhs->getStatementName(), $rhs->getStatementName());
+            $stack[] = new Proposition($name, $lhs->getValue() >= $rhs->getValue());
             break;
         }
 

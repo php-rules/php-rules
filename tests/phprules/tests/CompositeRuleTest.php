@@ -38,7 +38,7 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
 
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
-        $this->assertEquals('( ( varA2 == varA1 ) AND ( NOT ( varB2 == varB1 ) ) )', $result->getName());
+        $this->assertEquals('( ( varA1 == varA2 ) AND ( NOT ( varB1 == varB2 ) ) )', $result->getName());
 
         // make A fail
         $ruleContext->addElement('varA2', 'xxx');
@@ -56,7 +56,7 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
         $ruleContext->addElement('varB2', 'foo');
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertFalse($result->value);
-        $this->assertEquals('( ( varA2 == varA1 ) AND ( NOT ( varB2 == varB1 ) ) )', $result->getName());
+        $this->assertEquals('( ( varA1 == varA2 ) AND ( NOT ( varB1 == varB2 ) ) )', $result->getName());
     }
 
     public function testOr()
@@ -89,7 +89,7 @@ class CompositeRuleTest extends \PHPUnit_Framework_TestCase
 
         $result = $compositeRule->evaluate($ruleContext);
         $this->assertTrue($result->value);
-        $this->assertEquals('( ( varA2 == varA1 ) OR ( NOT ( varB2 == varB1 ) ) )', $result->getName());
+        $this->assertEquals('( ( varA1 == varA2 ) OR ( NOT ( varB1 == varB2 ) ) )', $result->getName());
 
         // make A fail
         $ruleContext->addElement('varA2', 'xxx');

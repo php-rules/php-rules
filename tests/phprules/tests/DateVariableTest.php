@@ -60,8 +60,8 @@ class DateVariableTest extends \PHPUnit_Framework_TestCase
     {
         $then = new DateVariable('dateThen', '2011-01-01');
         $rule = new Rule('test');
-        $rule->addVariable($this->date);
         $rule->addVariable($then);
+        $rule->addVariable($this->date);
         $rule->addOperator(Comparison::LESS_THAN);
         $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
@@ -88,8 +88,8 @@ class DateVariableTest extends \PHPUnit_Framework_TestCase
     {
         $then = new DateVariable('dateThen', '2011-01-01');
         $rule = new Rule('test');
-        $rule->addVariable($then);
         $rule->addVariable($this->date);
+        $rule->addVariable($then);
         $rule->addOperator(Comparison::GREATER_THAN);
         $p = $rule->evaluate(new RuleContext());
         $this->assertTrue($p->value);
