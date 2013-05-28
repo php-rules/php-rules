@@ -1,4 +1,4 @@
-# PHPi Rules #
+# PHP Rules #
 
 [![Build Status](https://travis-ci.org/DerManoMann/phprules.png)](https://travis-ci.org/DerManoMann/phprules)
 
