@@ -1,7 +1,9 @@
 <?php
 namespace phprules;
 
+use InvalidArgumentException;
 use phprules\source\SourceInterface;
+
 /**
  * Agnostic rule loader.
  *
@@ -51,6 +53,7 @@ class RuleLoader
      * @param SourceInterface $source The source to load from.
      * @param RuleInterface $rule Optional rule to load into; default is <code>null</code> to create a new one.
      * @return Rule The loaded rule.
+     * @throws InvalidArgumentException If the statement is not valid.
      */
     public function loadRule(SourceInterface $source, RuleInterface $rule = null)
     {
@@ -135,6 +138,7 @@ class RuleLoader
      *
      * @param array $tokens The tokens.
      * @param  RuleContext $ruleContext The rule context for this statement.
+     * @throws InvalidArgumentException If an invalid token is found.
      */
     protected function processRuleContextStatement($tokens, $ruleContext)
     {

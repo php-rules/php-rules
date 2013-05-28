@@ -10,6 +10,8 @@ use InvalidArgumentException;
  */
 class RuleParser
 {
+    protected static $OPERATORS = array('<', '>', '=');
+    protected static $BRACKETS = array('(', ')');
     protected $ruleString;
     protected $pos;
 
@@ -35,16 +37,33 @@ class RuleParser
         $token = null;
         $ii = $this->pos;
         while ($ii < strlen($this->ruleString)) {
-            $char = $this->ruleString[$ii];
+            $char = $this->ruleString[$ii++];
+            if (!empty($token)) {
+                // context switch?
+                if (in_array($char, static::$OPERATORS) && !in_array($token[0], static::$OPERATORS)) {
+                    --$ii;
+                    break;
+                }
+                if (!in_array($char, static::$OPERATORS))
+                    if (in_array($char, static::$BRACKETS) || in_array($token[0], static::$OPERATORS)) {
+                    --$ii;
+                    break;
+                }
+            }
             if (' ' == $char || empty($char)) {
+                if (empty($token)) {
+                    continue;
+                }
                 break;
             }
             $token .= $char;
-            ++$ii;
+            if (in_array($char, static::$BRACKETS)) {
+                break;
+            }
         }
 
         if (!$peek) {
-            $this->pos += $ii;
+            $this->pos = $ii;
         }
 
         return $token;
@@ -54,9 +73,9 @@ class RuleParser
      * Parse the given rule string.
      *
      * @param string $ruleString The rule as string.
-     * @return Rule A rule.
+     * @return array A list of individual token.
      */
-    public function parse($ruleString)
+    public function parseToken($ruleString)
     {
         $this->ruleString = $ruleString ?: $this->ruleString;
         $this->pos = 0;
@@ -64,6 +83,14 @@ class RuleParser
         if (!$this->ruleString) {
             new InvalidArgumentException('Need a rule string');
         }
+
+        $token = array();
+        while ($nt = $this->next()) {
+            $token[] = $nt;
+        }
+        
+        return $token;
+    }
 
         /*
 
@@ -80,6 +107,5 @@ CONST foo
 EQUALTO
 AND
         */
-    }
 
 }

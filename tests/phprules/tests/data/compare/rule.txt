@@ -1,7 +1,0 @@
-# a comparing rule
-
-VAR actualNumPeople
-VAR minNumPeople
-GREATERTHANOREQUALTO
-BOOL freeForAll
-OR

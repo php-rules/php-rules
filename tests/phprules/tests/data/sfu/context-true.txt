@@ -1,5 +1,0 @@
-passengerIsEconomy IS true      
-passengerIsGoldCardHolder IS true
-passengerIsSilverCardHolder IS false    
-passengerCarryOnBaggageWeight EQUALS 10.0
-passengerCarryOnBaggageAllowance EQUALS 15.0        

@@ -1,3 +1,0 @@
-minNumPeople EQUALS 4
-actualNumPeople EQUALS 3
-freeForAll IS false

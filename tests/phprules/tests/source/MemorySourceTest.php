@@ -8,7 +8,10 @@ use phprules\source\MemorySource;
 class MemorySourceTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testWithRuleContext()
+    /**
+     * Test load rule context
+     */
+    public function testLoadRuleContext()
     {
         $inlineRuleContext = new RuleContext();
         $inlineRuleContext->addElement('var1', 'foo');

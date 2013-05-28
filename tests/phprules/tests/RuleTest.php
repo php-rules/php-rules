@@ -10,6 +10,7 @@ use phprules\CompositeRule;
 
 class RuleTest extends \PHPUnit_Framework_TestCase
 {
+
     public function testRuleName()
     {
         $rule = new Rule('testRuleName');
@@ -117,8 +118,8 @@ class RuleTest extends \PHPUnit_Framework_TestCase
   {
       // rule with default null brand
       $brandRule = new Rule('brandRule');
-      $brandRule->addVariable('brandList', array());
       $brandRule->addVariable('brand', null);
+      $brandRule->addVariable('brandList', array());
       $brandRule->addOperator(In::IN);
 
       // there might be other rules, etc to add...

@@ -1,3 +1,0 @@
-A IS false
-B EQUALS xxx
-C EQUALS foo

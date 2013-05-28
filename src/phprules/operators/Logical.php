@@ -48,16 +48,16 @@ class Logical implements OperatorInterface
 
         switch ($operator) {
         case static::LOGICAL_OR:
-            $name = sprintf('( %s OR %s )', $rhs->getName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() or $lhs->getValue());
+            $name = sprintf('( %s OR %s )', $lhs->getName(), $rhs->getName());
+            $stack[] = new Proposition($name, $lhs->getValue() or $rhs->getValue());
             break;
         case static::LOGICAL_AND:
-            $name = sprintf('( %s AND %s )', $rhs->getName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() and $lhs->getValue());
+            $name = sprintf('( %s AND %s )', $lhs->getName(), $rhs->getName());
+            $stack[] = new Proposition($name, $lhs->getValue() and $rhs->getValue());
             break;
         case static::LOGICAL_XOR:
-            $name = sprintf('( %s XOR %s )', $rhs->getName(), $lhs->getName());
-            $stack[] = new Proposition($name, $rhs->getValue() xor $lhs->getValue());
+            $name = sprintf('( %s XOR %s )', $lhs->getName(), $rhs->getName());
+            $stack[] = new Proposition($name, $lhs->getValue() xor $rhs->getValue());
             break;
         case static::LOGICAL_NOT:
             $name = sprintf('( NOT %s )', $rhs->getName());

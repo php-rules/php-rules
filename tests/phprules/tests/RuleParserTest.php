@@ -19,21 +19,35 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test simple rule.
+     * Test parseToken().
      */
-    public function testSimple()
+    public function testParseToken()
     {
-        $ruleString = "( ( C == 'foo' ) AND ( ( B == 'bar' ) OR A ) )";
+        $ruleStrings = array(
+            "( ( C == 'foo' ) AND ( ( B == 'bar' ) OR A ) )",
+            "((C=='foo')AND((B=='bar')OR A))"
+        );
+        $expected = array('(', '(', 'C', '==', "'foo'", ')', 'AND', '(', '(', 'B', '==', "'bar'", ')', 'OR', 'A', ')', ')');
+
+        $ruleParser = new RuleParser();
+        foreach ($ruleStrings as $ruleString) {
+            $token = $ruleParser->parseToken($ruleString);
+            $this->assertEquals($expected, $token);
+        }
+    }
+    
+    /*
+    
         $ruleLoader = new RuleLoader();
         $ruleContext = $ruleLoader->loadRuleContext(new MemorySource(array(
             'C EQUALS foo',
             'B EQUALS bar',
             'A IS true',
         )));
-        var_dump($ruleContext);
+        //var_dump($ruleContext);
 
         $ruleParser = new RuleParser();
-        $rule = $ruleParser->parse($ruleString);
+        $rule = $ruleParser->parseToken($ruleString);
         $this->assertNotNull($rule);
         $this->assertTrue($rule instanceof Rule);
 
@@ -44,5 +58,6 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($p->value);
         $this->assertEquals($ruleString, $p->getName());
     }
+    */
 
 }

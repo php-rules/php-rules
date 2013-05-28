@@ -41,8 +41,12 @@ class In implements OperatorInterface
 
         switch ($operator) {
         case static::IN:
-            $name = sprintf('( %s IN ( %s ) )', $rhs->getStatementName(), $lhs->getName());
-            $stack[] = new Proposition($name, is_array($lhs->getValue()) && in_array($rhs->getValue(), $lhs->getValue()));
+            $rhsValue = $rhs->getValue();
+            if (is_string($rhsValue)) {
+                $rhsValue = explode(',', $rhsValue);
+            }
+            $name = sprintf('( %s IN ( %s ) )', $lhs->getName(), implode(',', $rhsValue));
+            $stack[] = new Proposition($name, in_array($lhs->getValue(), $rhsValue));
             break;
         }
 
