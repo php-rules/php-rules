@@ -77,7 +77,8 @@ class RuleContext
      */
     public function append(RuleContext $ruleContext)
     {
-        foreach ($ruleContext->elements as $name => $value) {
+        $elements = $ruleContext->getElements();
+        foreach ($elements as $name => $value) {
             $this->elements[$name] = $value;
         }
     }
