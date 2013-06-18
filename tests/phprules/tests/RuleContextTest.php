@@ -9,6 +9,9 @@ use phprules\operators\Comparison;
 class RuleContextTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Test incomplete rule context.
+     */
     public function testIncompleteRuleContext()
     {
         $rule = new Rule('foo');
@@ -38,4 +41,14 @@ class RuleContextTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test append.
+     */
+    public function testAppend()
+    {
+        $ruleContext = new RuleContext();
+        $ruleContext->append(new RuleContext(array('foo' => 'bar')));
+        $this->assertEquals(array('foo' => 'bar'), $ruleContext->getElements());
+    }
+    
 }
