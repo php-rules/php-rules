@@ -106,6 +106,7 @@ class RuleLoader
         } elseif ('VAR' == $tokens[0]) {
             $rule->addVariable($tokens[1]);
         } elseif ('CONST' == $tokens[0]) {
+            // TODO: strip optional quotes
             $rule->addVariable(null, $tokens[1]);
         } else if ($tokens) {
             throw new InvalidArgumentException('Invalid token');

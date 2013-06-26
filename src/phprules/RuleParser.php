@@ -70,7 +70,7 @@ class RuleParser
     }
 
     /**
-     * Parse the given rule string.
+     * Parse the given rule string into separate token.
      *
      * @param string $ruleString The rule as string.
      * @return array A list of individual token.
@@ -92,20 +92,39 @@ class RuleParser
         return $token;
     }
 
-        /*
+    /**
+     * Parse the given rule string into a rule.
+     *
+     * @param string $ruleString The rule as string.
+     * @return Rule A rule instance.
+     */
+    public function parseRule($ruleString)
+    {
+        $rule = new Rule(spl_object_hash($this).time());
+        $stack = array();
+        foreach ($this->parseToken($ruleString) as $token) {
+            if ('(' == $token) {
+                array_push($stack, array());
+            } else if (')' == $token) {
+                $elements = array_pop($stack);
+                if (3 == count($elements)) {
+                    $rule->addVariable($elements[0]);
+                    $rule->addVariable($elements[2]);
+                    $rule->addOperator($elements[1]);
+                } else if (2 == count($elements)) {
+                    $rule->addVariable($elements[1]);
+                    $rule->addOperator($elements[0]);
+                } else if (1 == count($elements)) {
+                    $rule->addOperator($elements[0]);
+                }
+            } else {
+                $tmp = array_pop($stack);
+                $tmp[] = $token;
+                array_push($stack, $tmp);
+            }
+        }
 
-( ( C == 'foo' ) AND ( ( B == 'bar' ) OR A ) )
-
-
-BOOL A
-VAR B
-CONST bar
-EQUALTO
-OR
-VAR C
-CONST foo
-EQUALTO
-AND
-        */
+        return $rule;
+    }
 
 }

@@ -16,7 +16,6 @@ class RuleSyntaxTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new RuleLoader();
         $rule = $loader->loadRule(new MemorySource($rule));
-
         $p = $rule->evaluate($loader->loadRuleContext(new MemorySource($positive)));
         $this->assertNotNull($p);
         $this->assertTrue($p instanceof Proposition);
@@ -207,7 +206,7 @@ freeForAll IS false
         $this->doTestRule($rule, $positive, $negative);
     }
 
-    public function testList()
+    public function testVarList()
     {
         $rule = "
 VAR colour
@@ -223,6 +222,24 @@ colour EQUALS pink
 colourList EQUALS blue,green,red,yellow
 ";
         $expectedName = "( colour IN colourList )";
+
+        $this->doTestRule($rule, $positive, $negative);
+    }
+
+    public function testConstList()
+    {
+        $rule = "
+VAR colour
+CONST blue,green,red,yellow
+IN
+";
+        $positive ="
+colour EQUALS blue
+";
+        $negative ="
+colour EQUALS pink
+";
+        $expectedName = "( colour IN 'blue,green,red,yellow' )";
 
         $this->doTestRule($rule, $positive, $negative);
     }

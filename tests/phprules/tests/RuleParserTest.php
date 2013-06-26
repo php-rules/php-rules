@@ -3,6 +3,7 @@ namespace phprules\tests;
 
 use phprules\Proposition;
 use phprules\Rule;
+use phprules\RuleContext;
 use phprules\RuleLoader;
 use phprules\RuleParser;
 use phprules\source\MemorySource;
@@ -25,7 +26,8 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
     {
         $ruleStrings = array(
             "( ( C == 'foo' ) AND ( ( B == 'bar' ) OR A ) )",
-            "((C=='foo')AND((B=='bar')OR A))"
+            "((C=='foo')AND((B=='bar')OR A))",
+            "((C       =='foo')             AND((B=='bar')OR A))        ",
         );
         $expected = array('(', '(', 'C', '==', "'foo'", ')', 'AND', '(', '(', 'B', '==', "'bar'", ')', 'OR', 'A', ')', ')');
 
@@ -36,21 +38,19 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
         }
     }
     
-    /*
-    
-        $ruleLoader = new RuleLoader();
-        $ruleContext = $ruleLoader->loadRuleContext(new MemorySource(array(
-            'C EQUALS foo',
-            'B EQUALS bar',
-            'A IS true',
-        )));
-        //var_dump($ruleContext);
+    /**
+     * Test parseRule().
+     */
+    public function XtestParseRule()
+    {
+        $ruleString = "( ( A AND B ) OR C )";
 
         $ruleParser = new RuleParser();
-        $rule = $ruleParser->parseToken($ruleString);
+        $rule = $ruleParser->parseRule($ruleString);
         $this->assertNotNull($rule);
         $this->assertTrue($rule instanceof Rule);
-
+        
+        $ruleContext = new RuleContext(array('A' => true, 'B' => true, 'C' => false));
         $p = $rule->evaluate($ruleContext);
         $this->assertNotNull($p);
         $this->assertTrue($p instanceof Proposition);
@@ -58,6 +58,5 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($p->value);
         $this->assertEquals($ruleString, $p->getName());
     }
-    */
 
 }
