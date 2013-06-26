@@ -10,3 +10,10 @@ separate conditional logic from source code and database triggers in a reusable 
 where explicit rules can be independently defined and managed."
 
 [...more](http://www.swindle.net/php-rules/tutorials/getting-started))
+
+## New Features ##
+* simplified rule syntax using `BOOL`/`VAR` to indicate propositions/variables
+* refactored rule/context loading that should make it easier to integrate into different storage systems
+* `IN` operator to evaluate if a value exists in a list
+* support to dynamically add operators
+* `CompositeRule` class to allow to pragmatically create nested rules
