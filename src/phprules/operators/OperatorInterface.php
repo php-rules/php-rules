@@ -1,8 +1,6 @@
 <?php
 namespace phprules\operators;
 
-use phprules\RuleElement;
-
 /**
  * An interface for pluggable operators.
  *
@@ -20,9 +18,9 @@ interface OperatorInterface
     /**
      * Perform a operation on the given stack.
      *
-     * @param string $operator The operator symbol.
-     * @param array $stack The stack.
-     * @return array The updated stack.
+     * @param  string $operator The operator symbol.
+     * @param  array  $stack    The stack.
+     * @return array  The updated stack.
      */
     public static function perform($operator, $stack);
 

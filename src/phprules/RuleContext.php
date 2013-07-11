@@ -18,8 +18,8 @@ class RuleContext
     /**
      * Create new context.
      *
-     * @param array $elements The elements; default is an empty array.
-     * @param string $name Optional context name; default is an empty string.
+     * @param array  $elements The elements; default is an empty array.
+     * @param string $name     Optional context name; default is an empty string.
      */
     public function __construct($elements = array(), $name = '')
     {
@@ -52,7 +52,7 @@ class RuleContext
      * Get an element value.
      *
      * @param  string $name The name (i.e., "key") of the element.
-     * @return mixed The value or <code>null</code>.
+     * @return mixed  The value or <code>null</code>.
      */
     public function getElement($name)
     {
@@ -62,7 +62,7 @@ class RuleContext
     /**
      * Test if an element for the given name exits.
      *
-     * @param  string $name The name (i.e., "key") of the element.
+     * @param  string  $name The name (i.e., "key") of the element.
      * @return boolean <code>true</code> if it exits, <code>false</code> otherwise.
      */
     public function hasElement($name)

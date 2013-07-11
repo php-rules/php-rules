@@ -29,8 +29,8 @@ class RuleParser
     /**
      * Get the next token.
      *
-     * @param boolean $peek Optional flag to peek only; default is <code>false</code>.
-     * @return string The next token or <code>null</code>.
+     * @param  boolean $peek Optional flag to peek only; default is <code>false</code>.
+     * @return string  The next token or <code>null</code>.
      */
     public function next($peek = false)
     {
@@ -72,8 +72,8 @@ class RuleParser
     /**
      * Parse the given rule string into separate token.
      *
-     * @param string $ruleString The rule as string.
-     * @return array A list of individual token.
+     * @param  string $ruleString The rule as string.
+     * @return array  A list of individual token.
      */
     public function parseToken($ruleString)
     {
@@ -88,15 +88,15 @@ class RuleParser
         while ($nt = $this->next()) {
             $token[] = $nt;
         }
-        
+
         return $token;
     }
 
     /**
      * Parse the given rule string into a rule.
      *
-     * @param string $ruleString The rule as string.
-     * @return Rule A rule instance.
+     * @param  string $ruleString The rule as string.
+     * @return Rule   A rule instance.
      */
     public function parseRule($ruleString)
     {
@@ -105,16 +105,16 @@ class RuleParser
         foreach ($this->parseToken($ruleString) as $token) {
             if ('(' == $token) {
                 array_push($stack, array());
-            } else if (')' == $token) {
+            } elseif (')' == $token) {
                 $elements = array_pop($stack);
                 if (3 == count($elements)) {
                     $rule->addVariable($elements[0]);
                     $rule->addVariable($elements[2]);
                     $rule->addOperator($elements[1]);
-                } else if (2 == count($elements)) {
+                } elseif (2 == count($elements)) {
                     $rule->addVariable($elements[1]);
                     $rule->addOperator($elements[0]);
-                } else if (1 == count($elements)) {
+                } elseif (1 == count($elements)) {
                     $rule->addOperator($elements[0]);
                 }
             } else {

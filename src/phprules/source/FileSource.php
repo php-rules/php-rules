@@ -28,7 +28,8 @@ class FileSource implements SourceInterface
     /**
      * {@inheritDoc}
      */
-    public function getData() {
+    public function getData()
+    {
         return file_get_contents($this->filename);
     }
 

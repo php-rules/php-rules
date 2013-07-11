@@ -4,9 +4,7 @@ namespace phprules\tests;
 use phprules\Proposition;
 use phprules\Rule;
 use phprules\RuleContext;
-use phprules\RuleLoader;
 use phprules\RuleParser;
-use phprules\source\MemorySource;
 
 class RuleParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +35,7 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expected, $token);
         }
     }
-    
+
     /**
      * Test parseRule().
      */
@@ -49,7 +47,7 @@ class RuleParserTest extends \PHPUnit_Framework_TestCase
         $rule = $ruleParser->parseRule($ruleString);
         $this->assertNotNull($rule);
         $this->assertTrue($rule instanceof Rule);
-        
+
         $ruleContext = new RuleContext(array('A' => true, 'B' => true, 'C' => false));
         $p = $rule->evaluate($ruleContext);
         $this->assertNotNull($p);

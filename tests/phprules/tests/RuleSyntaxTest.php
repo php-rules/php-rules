@@ -2,7 +2,6 @@
 namespace phprules\tests;
 
 use phprules\Proposition;
-use phprules\RuleContext;
 use phprules\RuleLoader;
 use phprules\source\MemorySource;
 
@@ -46,21 +45,21 @@ LESSTHANOREQUALTO
 AND
 ";
         $positive ="
-passengerIsEconomy IS true      
+passengerIsEconomy IS true
 passengerIsGoldCardHolder IS true
-passengerIsSilverCardHolder IS false    
+passengerIsSilverCardHolder IS false
 passengerCarryOnBaggageWeight EQUALS 10.0
 passengerCarryOnBaggageAllowance EQUALS 15.0
 ";
         $negative ="
-passengerIsEconomy IS true      
+passengerIsEconomy IS true
 passengerIsGoldCardHolder IS false
-passengerIsSilverCardHolder IS false    
+passengerIsSilverCardHolder IS false
 passengerCarryOnBaggageWeight EQUALS 10.0
 passengerCarryOnBaggageAllowance EQUALS 15.0
 ";
         $expectedName = "( ( passengerIsEconomy AND ( passengerIsGoldCardHolder OR passengerIsSilverCardHolder ) ) AND ( passengerCarryOnBaggageWeight <= passengerCarryOnBaggageAllowance ) )";
-        
+
         $this->doTestRule($rule, $positive, $negative, $expectedName);
     }
 
@@ -81,21 +80,21 @@ LESSTHANOREQUALTO
 AND
 ";
         $positive ="
-passengerIsEconomy IS true      
+passengerIsEconomy IS true
 passengerIsGoldCardHolder IS true
-passengerIsSilverCardHolder IS false    
+passengerIsSilverCardHolder IS false
 passengerCarryOnBaggageWeight EQUALS 10.0
-passengerCarryOnBaggageAllowance EQUALS 15.0        
+passengerCarryOnBaggageAllowance EQUALS 15.0
 ";
         $negative ="
-passengerIsEconomy IS false      
+passengerIsEconomy IS false
 passengerIsGoldCardHolder IS true
-passengerIsSilverCardHolder IS false    
+passengerIsSilverCardHolder IS false
 passengerCarryOnBaggageWeight EQUALS 10.0
-passengerCarryOnBaggageAllowance EQUALS 15.0        
+passengerCarryOnBaggageAllowance EQUALS 15.0
 ";
         $expectedName = "( ( passengerIsEconomy AND ( passengerIsGoldCardHolder OR passengerIsSilverCardHolder ) ) AND ( passengerCarryOnBaggageWeight <= passengerCarryOnBaggageAllowance ) )";
-        
+
         $this->doTestRule($rule, $positive, $negative, $expectedName);
     }
 
@@ -122,7 +121,7 @@ B IS true
 C IS false
 ";
         $expectedName = "( ( A AND B ) OR C )";
-        
+
         $this->doTestRule($rule, $positive, $negative, $expectedName);
     }
 

@@ -56,6 +56,7 @@ class Operator extends RuleElement
     public function evaluate($stack)
     {
         $class = static::$symbols[$this->getName()];
+
         return $class::perform($this->getName(), $stack);
     }
 

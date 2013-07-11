@@ -1,7 +1,6 @@
 <?php
 namespace phprules;
 
-
 /**
  * A rule.
  *
@@ -38,8 +37,8 @@ class Rule extends AbstractRule
     /**
      * Adds a proposition.
      *
-     * @param mixed $proposition The propositions statement or a <code>Proposition</code>.
-     * @param boolean $result    Optional proposition result; default is <code>false</code> - ignored if <code>$name</code>
+     * @param mixed   $proposition The propositions statement or a <code>Proposition</code>.
+     * @param boolean $result      Optional proposition result; default is <code>false</code> - ignored if <code>$name</code>
      *  is a <code>Proposition</code>.
      */
     public function addProposition($proposition, $result = false)
@@ -54,8 +53,8 @@ class Rule extends AbstractRule
     /**
      * Adds a variable.
      *
-     * @param mixed $variable  The name or a <code>Variable</code> instance.
-     * @param mixed $value     The value; default is <code>null</code> - ignored if <code>$name</code>
+     * @param mixed $variable The name or a <code>Variable</code> instance.
+     * @param mixed $value    The value; default is <code>null</code> - ignored if <code>$name</code>
      *  is a <code>Variable</code>.
      */
     public function addVariable($variable, $value = null)

@@ -50,5 +50,5 @@ class RuleContextTest extends \PHPUnit_Framework_TestCase
         $ruleContext->append(new RuleContext(array('foo' => 'bar')));
         $this->assertEquals(array('foo' => 'bar'), $ruleContext->getElements());
     }
-    
+
 }

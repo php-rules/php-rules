@@ -18,9 +18,10 @@ class RuleLoader
      * <p>A statement is considered a single line of either a rule or context.</p>
      *
      * @param  SourceInterface $source The source to load from.
-     * @return array List of tokens.
+     * @return array           List of tokens.
      */
-    protected function getStatements(SourceInterface $source) {
+    protected function getStatements(SourceInterface $source)
+    {
         return $this->tokenize($source->getData());
     }
 
@@ -31,8 +32,8 @@ class RuleLoader
      *
      * <p>Statements starting with "#' will be treated as comment.</p>
      *
-     * @param string $data The data to tokenize.
-     * @return array The tokenized data.
+     * @param  string $data The data to tokenize.
+     * @return array  The tokenized data.
      */
     protected function tokenize($data)
     {
@@ -50,9 +51,9 @@ class RuleLoader
     /**
      * Load a rule.
      *
-     * @param SourceInterface $source The source to load from.
-     * @param RuleInterface $rule Optional rule to load into; default is <code>null</code> to create a new one.
-     * @return Rule The loaded rule.
+     * @param  SourceInterface          $source The source to load from.
+     * @param  RuleInterface            $rule   Optional rule to load into; default is <code>null</code> to create a new one.
+     * @return Rule                     The loaded rule.
      * @throws InvalidArgumentException If the statement is not valid.
      */
     public function loadRule(SourceInterface $source, RuleInterface $rule = null)
@@ -80,8 +81,8 @@ class RuleLoader
     /**
      * Process operator statement.
      *
-     * @param array $tokens The statement token.
-     * @param RuleInterface $rule Rule for this operator.
+     * @param array         $tokens The statement token.
+     * @param RuleInterface $rule   Rule for this operator.
      */
     protected function processOperator($tokens, RuleInterface $rule)
     {
@@ -91,8 +92,8 @@ class RuleLoader
     /**
      * Process a rule statement.
      *
-     * @param array $tokens The statement token.
-     * @param RuleInterface $rule Rule for this statement.
+     * @param array         $tokens The statement token.
+     * @param RuleInterface $rule   Rule for this statement.
      */
     protected function processRuleStatement($tokens, RuleInterface $rule)
     {
@@ -108,7 +109,7 @@ class RuleLoader
         } elseif ('CONST' == $tokens[0]) {
             // TODO: strip optional quotes
             $rule->addVariable(null, $tokens[1]);
-        } else if ($tokens) {
+        } elseif ($tokens) {
             throw new InvalidArgumentException('Invalid token');
         }
     }
@@ -116,9 +117,9 @@ class RuleLoader
     /**
      * Load a rule context.
      *
-     * @param  SourceInterface $source The source to load from.
-     * @param  RuleContext $ruleContext  Optional rule context to load into; default is <code>null</code>.
-     * @return RuleContext The loaded rule context.
+     * @param  SourceInterface $source      The source to load from.
+     * @param  RuleContext     $ruleContext Optional rule context to load into; default is <code>null</code>.
+     * @return RuleContext     The loaded rule context.
      */
     public function loadRuleContext(SourceInterface $source, RuleContext $ruleContext = null)
     {
@@ -137,8 +138,8 @@ class RuleLoader
     /**
      * Process a rule context statement.
      *
-     * @param array $tokens The tokens.
-     * @param  RuleContext $ruleContext The rule context for this statement.
+     * @param  array                    $tokens      The tokens.
+     * @param  RuleContext              $ruleContext The rule context for this statement.
      * @throws InvalidArgumentException If an invalid token is found.
      */
     protected function processRuleContextStatement($tokens, $ruleContext)
@@ -147,7 +148,7 @@ class RuleLoader
             $ruleContext->addElement($tokens[0], $tokens[2]);
         } elseif ('IS' == $tokens[1]) {
             $ruleContext->addElement($tokens[0], $tokens[2] == 'true');
-        } else if ($tokens) {
+        } elseif ($tokens) {
             throw new InvalidArgumentException('Invalid token');
         }
     }

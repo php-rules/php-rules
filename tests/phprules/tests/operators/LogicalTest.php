@@ -1,7 +1,6 @@
 <?php
 namespace phprules\tests\operators;
 
-use phprules\Variable;
 use phprules\Proposition;
 use phprules\operators\Logical;
 
@@ -11,22 +10,23 @@ class LogicalTest extends \PHPUnit_Framework_TestCase
     /**
      * Get all stack combinations.
      */
-    protected function getStacks() {
+    protected function getStacks()
+    {
         return array(
             array(
-                new Proposition('first', true), 
+                new Proposition('first', true),
                 new Proposition('second', false),
             ),
             array(
-                new Proposition('first', false), 
+                new Proposition('first', false),
                 new Proposition('second', true),
             ),
             array(
-                new Proposition('first', true), 
+                new Proposition('first', true),
                 new Proposition('second', true),
             ),
             array(
-                new Proposition('first', false), 
+                new Proposition('first', false),
                 new Proposition('second', false),
             ),
         );
@@ -50,7 +50,7 @@ class LogicalTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expectedName, $proposition->getName());
         }
     }
-    
+
     /**
      * Test OR
      */
@@ -70,7 +70,7 @@ class LogicalTest extends \PHPUnit_Framework_TestCase
         $expectedName = "( first AND second )";
         $this->doTest(Logical::LOGICAL_AND, $expectedResults, $expectedName);
     }
-    
+
     /**
      * Test XOR
      */
@@ -80,7 +80,7 @@ class LogicalTest extends \PHPUnit_Framework_TestCase
         $expectedName = "( first XOR second )";
         $this->doTest(Logical::LOGICAL_XOR, $expectedResults, $expectedName);
     }
-    
+
     /**
      * Test NOT
      */
@@ -90,5 +90,5 @@ class LogicalTest extends \PHPUnit_Framework_TestCase
         $expectedName = "( NOT first )";
         $this->doTest(Logical::LOGICAL_NOT, $expectedResults, $expectedName, true);
     }
-    
+
 }

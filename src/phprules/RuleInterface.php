@@ -25,8 +25,8 @@ interface RuleInterface
     /**
      * Evaluate this rule in the given context.
      *
-     * @param RuleContext $ruleContext The context; default is <code>null</code> for none.
-     * @return boolean The result.
+     * @param  RuleContext $ruleContext The context; default is <code>null</code> for none.
+     * @return boolean     The result.
      */
     public function evaluate(RuleContext $ruleContext = null);
 

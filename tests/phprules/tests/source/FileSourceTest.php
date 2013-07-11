@@ -43,7 +43,6 @@ class FileSourceTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($ruleContext->getElements());
         $this->assertEquals(5, count($ruleContext->getElements()));
 
-
         $ruleContext = $this->loader->loadRuleContext(new FileSource($this->dataFolderPath.'/context2.txt'));
         $this->assertNotNull($ruleContext);
         $this->assertNotNull($ruleContext->getElements());

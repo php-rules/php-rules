@@ -26,7 +26,8 @@ class MemorySource implements SourceInterface
     /**
      * {@inheritDoc}
      */
-    public function getData() {
+    public function getData()
+    {
         return $this->data;
     }
 

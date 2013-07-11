@@ -9,18 +9,19 @@ class ComparisonTest extends \PHPUnit_Framework_TestCase
     /**
      * Get some stacks.
      */
-    protected function getStacks() {
+    protected function getStacks()
+    {
         return array(
             array(
-                new Variable('first', 1), 
+                new Variable('first', 1),
                 new Variable('second', 2),
             ),
             array(
-                new Variable('first', 2), 
+                new Variable('first', 2),
                 new Variable('second', 1),
             ),
             array(
-                new Variable('first', 3), 
+                new Variable('first', 3),
                 new Variable('second', 3),
             ),
         );
@@ -44,7 +45,7 @@ class ComparisonTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expectedName, $proposition->getName());
         }
     }
-    
+
     /**
      * Test equal to
      */

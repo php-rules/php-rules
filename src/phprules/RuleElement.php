@@ -43,7 +43,8 @@ abstract class RuleElement
      *
      * <p>If appropriate, take the actual value for this element from the rule context.
      */
-    public function applyRuleContext(RuleContext $ruleContext) {
+    public function applyRuleContext(RuleContext $ruleContext)
+    {
         if (!$ruleContext->hasElement($this->name)) {
             if (null === $this->getValue()) {
                 throw new InvalidArgumentException(sprintf('incomplete context, missing value for: %s', $this->name));
