@@ -2,6 +2,7 @@ PHP Rules
 =========
 
 [![Build Status](https://travis-ci.org/DerManoMann/phprules.png)](https://travis-ci.org/DerManoMann/phprules)
+[![Coverage Status](https://coveralls.io/repos/DerManoMann/phprules/badge.png)](https://coveralls.io/r/DerManoMann/phprules)
 
 PHPRules is a PHP 5.3 fork of the [php-rules][1] project.
 
