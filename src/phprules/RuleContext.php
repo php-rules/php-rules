@@ -4,9 +4,6 @@ namespace phprules;
 /**
  * Contains the informational context for the execution of a Rule.
  *
- * <p>It represents this information as a collection of RuleElements that may be Propositions or
- *  Variables but not Operators.</p>
- *
  * @author Greg Swindle <greg@swindle.net>
  * @author Martin Rademacher <mano@radebatz.net>
  */
@@ -94,7 +91,7 @@ class RuleContext
             $elements[] = sprintf('%s=%s', $name, is_bool($value) ? ($value ? 'true' : 'false') : $value);
         }
 
-        return "[".get_class($this)." elements=[" . implode(', ', $elements) . "]]";
+        return "[".get_class($this).($this->name ? " name=".$this->name : '')." elements=[" . implode(', ', $elements) . "]]";
     }
 
 }
