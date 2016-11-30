@@ -9,7 +9,7 @@ namespace phprules;
  */
 class RuleContext
 {
-    private $elements;
+    private $elements = array();
     private $name;
 
     /**
@@ -20,7 +20,10 @@ class RuleContext
      */
     public function __construct($elements = array(), $name = '')
     {
-        $this->elements = $elements;
+        if(is_array($elements)) {
+            $this->elements = $elements;    
+        }
+        
         $this->name = $name;
     }
 
